@@ -7,28 +7,28 @@
         android:title="การเชื่อมต่อ"
         app:iconSpaceReserved="false">
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="pause_vpn_on_blanked_screen"
             android:title="@string/pause_vpn_on_blanked_screen_title"
             android:summary="@string/pause_vpn_on_blanked_screen_summary"
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="tun_persist"
             android:title="@string/tun_persist_title"
             android:summary="@string/tun_persist_summary"
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="autostart"
             android:title="@string/autostart_title"
             android:summary="@string/autostart_summary"
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="autostart_finish_on_connect"
             android:title="@string/autostart_finish_on_connect_title"
             android:summary="@string/autostart_finish_on_connect_summary"
@@ -73,14 +73,14 @@
         android:title="ความปลอดภัย"
         app:iconSpaceReserved="false">
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="force_aes_cbc_ciphersuites_v2"
             android:title="@string/force_aes_cbc_ciphersuites_title"
             android:summary="@string/force_aes_cbc_ciphersuites_summary"
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="cert_profile_insecure"
             android:title="@string/cert_profile_insecure_title"
             android:summary="@string/cert_profile_insecure_summary"
@@ -95,7 +95,7 @@
             android:entryValues="@array/tls_version_min_override_values"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="google_dns_fallback"
             android:title="@string/google_dns_fallback_title"
             android:summary="@string/google_dns_fallback_summary"
@@ -108,21 +108,21 @@
         android:title="หน้าตาและการแจ้งเตือน"
         app:iconSpaceReserved="false">
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="auto_keyboard"
             android:title="@string/auto_keyboard_title"
             android:summary="@string/auto_keyboard_summary"
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="enable_notifications"
             android:title="@string/enable_notifications_title"
             android:summary="@string/enable_notifications_summary"
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreferenceCompat
             android:key="ui_dark_theme"
             android:title="@string/ui_dark_theme_title"
             android:summary="@string/ui_dark_theme_summary"
