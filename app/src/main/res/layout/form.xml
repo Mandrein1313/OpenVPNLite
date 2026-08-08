@@ -372,7 +372,7 @@
                     android:paddingRight="14dp" />
             </LinearLayout>
 
-            <!-- รายละเอียดการเชื่อมต่อ / สถิติ -->
+            <!-- รายละเอียดการเชื่อมต่อ / สถิติ (แบบใหม่ กระชับ) -->
             <LinearLayout
                 android:id="@+id/conn_details_group"
                 android:layout_width="match_parent"
@@ -387,7 +387,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:background="@android:color/white"
-                    android:padding="16dp"
+                    android:padding="14dp"
                     android:elevation="2dp">
 
                     <LinearLayout
@@ -400,73 +400,147 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/stats_group_header"
-                            android:textSize="14sp"
+                            android:textSize="12sp"
                             android:textStyle="bold"
                             android:textColor="#0EA5E9"
-                            android:paddingBottom="10dp" />
+                            android:paddingBottom="8dp" />
 
-                        <TableLayout
+                        <!-- แถว metric 3 ช่อง -->
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:stretchColumns="1">
+                            android:orientation="horizontal"
+                            android:weightSum="3">
 
-                            <TableRow>
+                            <!-- เวลา -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:layout_marginEnd="4dp"
+                                android:background="#F1F5F9">
+
                                 <TextView
-                                    android:text="@string/duration"
-                                    android:textColor="#6B7280"
-                                    android:textSize="13sp"
-                                    android:padding="6dp" />
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="เวลา"
+                                    android:textSize="10sp"
+                                    android:textColor="#64748B" />
+
                                 <TextView
                                     android:id="@+id/duration"
-                                    android:textColor="#111827"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0:00:00"
                                     android:textSize="13sp"
-                                    android:padding="6dp" />
-                            </TableRow>
-                            <TableRow>
+                                    android:textStyle="bold"
+                                    android:textColor="#0F172A"
+                                    android:paddingTop="2dp" />
+                            </LinearLayout>
+
+                            <!-- รับ -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginEnd="2dp"
+                                android:background="#F1F5F9">
+
                                 <TextView
-                                    android:text="@string/last_pkt_recv"
-                                    android:textColor="#6B7280"
-                                    android:textSize="13sp"
-                                    android:padding="6dp" />
-                                <TextView
-                                    android:id="@+id/last_pkt_recv"
-                                    android:textColor="#111827"
-                                    android:textSize="13sp"
-                                    android:padding="6dp" />
-                            </TableRow>
-                            <TableRow>
-                                <TextView
-                                    android:text="@string/bytes_in"
-                                    android:textColor="#6B7280"
-                                    android:textSize="13sp"
-                                    android:padding="6dp" />
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="↓ รับ"
+                                    android:textSize="10sp"
+                                    android:textColor="#64748B" />
+
                                 <TextView
                                     android:id="@+id/bytes_in"
-                                    android:textColor="#111827"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
                                     android:textSize="13sp"
-                                    android:padding="6dp" />
-                            </TableRow>
-                            <TableRow>
+                                    android:textStyle="bold"
+                                    android:textColor="#0F172A"
+                                    android:paddingTop="2dp" />
+                            </LinearLayout>
+
+                            <!-- ส่ง -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:padding="8dp"
+                                android:layout_marginStart="4dp"
+                                android:background="#F1F5F9">
+
                                 <TextView
-                                    android:text="@string/bytes_out"
-                                    android:textColor="#6B7280"
-                                    android:textSize="13sp"
-                                    android:padding="6dp" />
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="↑ ส่ง"
+                                    android:textSize="10sp"
+                                    android:textColor="#64748B" />
+
                                 <TextView
                                     android:id="@+id/bytes_out"
-                                    android:textColor="#111827"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
                                     android:textSize="13sp"
-                                    android:padding="6dp" />
-                            </TableRow>
-                        </TableLayout>
+                                    android:textStyle="bold"
+                                    android:textColor="#0F172A"
+                                    android:paddingTop="2dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- แพ็กเก็ตล่าสุด -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingTop="8dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/last_pkt_recv"
+                                android:textSize="11sp"
+                                android:textColor="#94A3B8" />
+
+                            <TextView
+                                android:id="@+id/last_pkt_recv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="—"
+                                android:textSize="11sp"
+                                android:textColor="#64748B" />
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <!-- ส่วนขยายรายละเอียด -->
                     <LinearLayout
                         android:id="@+id/stats_expansion_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="gone"
+                        android:paddingTop="10dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#E5E7EB"
+                            android:layout_marginBottom="10dp" />
 
                         <LinearLayout
                             android:id="@+id/info_group"
@@ -478,11 +552,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/info_group_header"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:textColor="#0EA5E9"
-                                android:paddingTop="14dp"
-                                android:paddingBottom="10dp" />
+                                android:paddingBottom="8dp" />
 
                             <TableLayout
                                 android:layout_width="match_parent"
@@ -490,36 +563,36 @@
                                 android:stretchColumns="1">
 
                                 <TableRow android:id="@+id/ipv4_addr_row">
-                                    <TextView android:text="@string/ipv4_addr" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/ipv4_addr" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/ipv4_addr" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/ipv4_addr" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/ipv6_addr_row">
-                                    <TextView android:text="@string/ipv6_addr" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/ipv6_addr" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/ipv6_addr" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/ipv6_addr" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/user_row">
-                                    <TextView android:text="@string/user" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/user" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/user" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/user" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/client_ip_row">
-                                    <TextView android:text="@string/client_ip" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/client_ip" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/client_ip" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/client_ip" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/server_host_row">
-                                    <TextView android:text="@string/server_host" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/server_host" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/server_host" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/server_host" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/server_ip_row">
-                                    <TextView android:text="@string/server_ip" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/server_ip" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/server_ip" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/server_ip" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/server_port_row">
-                                    <TextView android:text="@string/server_port" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/server_port" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/server_port" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/server_port" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                                 <TableRow android:id="@+id/server_proto_row">
-                                    <TextView android:text="@string/server_proto" android:textColor="#6B7280" android:textSize="13sp" android:padding="6dp" />
-                                    <TextView android:id="@+id/server_proto" android:textColor="#111827" android:textSize="13sp" android:padding="6dp" />
+                                    <TextView android:text="@string/server_proto" android:textColor="#6B7280" android:textSize="12sp" android:padding="4dp" />
+                                    <TextView android:id="@+id/server_proto" android:textColor="#111827" android:textSize="12sp" android:padding="4dp" />
                                 </TableRow>
                             </TableLayout>
                         </LinearLayout>
@@ -530,8 +603,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:paddingTop="12dp"
-                        android:textSize="13sp"
+                        android:paddingTop="10dp"
+                        android:textSize="12sp"
                         android:textColor="#0EA5E9" />
                 </LinearLayout>
             </LinearLayout>
