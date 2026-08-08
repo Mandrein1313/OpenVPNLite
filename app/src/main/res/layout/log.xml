@@ -1,14 +1,144 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:padding="3.0mm" style="@style/group">
-	<TextView android:text="@string/log_title" style="@style/item" />
-	<LinearLayout android:paddingTop="12.0sp" android:paddingBottom="12.0sp" style="@style/group">
-		<View android:background="#ff8080ff" android:layout_width="fill_parent" android:layout_height="2.0dip" />
-	</LinearLayout>
-	<ScrollView android:id="@+id/log_scrollview" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
-		<TextView android:id="@+id/log_textview" android:layout_width="fill_parent" android:layout_height="wrap_content" />
-	</ScrollView>
-	<LinearLayout style="@style/group">
-		<Button android:id="@+id/log_pause" android:visibility="gone" android:text="@string/log_pause" style="@style/item" />
-		<Button android:id="@+id/log_resume" android:visibility="gone" android:text="@string/log_resume" style="@style/item" />
-	</LinearLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F6F8"
+    android:padding="16dp">
+
+    <!-- หัวข้อ -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="บันทึกการเชื่อมต่อ OpenVPN"
+        android:textSize="13sp"
+        android:textColor="#6B7280"
+        android:paddingBottom="12dp" />
+
+    <!-- การ์ดแสดง Log -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:elevation="2dp"
+        android:padding="0dp">
+
+        <!-- แถบหัวการ์ด -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="#F8FAFC"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="#0EA5E9"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Live Log"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#334155" />
+
+            <TextView
+                android:id="@+id/log_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="กำลังอัปเดต"
+                android:textSize="11sp"
+                android:textColor="#0EA5E9" />
+        </LinearLayout>
+
+        <!-- เส้นคั่น -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E7EB" />
+
+        <!-- พื้นที่ Log -->
+        <ScrollView
+            android:id="@+id/log_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:padding="12dp"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/log_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#1E293B"
+                android:lineSpacingExtra="3dp"
+                android:fontFamily="monospace"
+                android:textIsSelectable="true"
+                android:text="" />
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- ปุ่มด้านล่าง -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="14dp"
+        android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/log_pause"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:text="@string/log_pause"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:cornerRadius="10dp"
+            app:backgroundTint="#EF4444"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.MaterialComponents.Button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/log_resume"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:text="@string/log_resume"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:cornerRadius="10dp"
+            app:backgroundTint="#0EA5E9"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.MaterialComponents.Button" />
+    </LinearLayout>
+
 </LinearLayout>
