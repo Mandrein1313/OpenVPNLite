@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    // เก็บ namespace เดิม ให้ตรงกับโฟลเดอร์ Java (net/openvpn/openvpn)
+    namespace "net.openvpn.openvpn"
+    compileSdk 34
+
+    defaultConfig {
+        // ชื่อแอปตอนติดตั้ง (package ใหม่)
+        applicationId "com.thvpn.client"
+
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        // แก้ปัญหา BuildConfig.FLAVOR หาไม่เจอ
+        buildConfigField "String", "FLAVOR", "\"\""
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+    }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/java/lib']
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+
+    // รวมไฟล์ jar ในโฟลเดอร์ libs ทั้งหมด (ซึ่งมี zip4j อยู่แล้ว)
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+}
