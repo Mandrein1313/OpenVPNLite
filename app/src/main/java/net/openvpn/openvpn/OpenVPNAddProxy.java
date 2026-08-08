@@ -68,56 +68,65 @@ public void onCreate(Bundle savedInstanceState) {
     doBindService();
 }
 
-    @Override
+@Override
     public void onClick(View v) {
         Log.d(TAG, "onClick");
         int viewid = v.getId();
+
         if (viewid == R.id.proxy_save_button) {
             ProxyList proxy_list = get_proxy_list();
-            if (proxy_list != null) {
-                Item item = new Item();
-
-                String friendly_name = this.friendly_name_edit.getText().toString().trim();
-                if (friendly_name.length() > 0) {
-                    item.friendly_name = friendly_name;
-                }
-
-                item.host = this.host_edit.getText().toString().trim();
-                item.port = this.port_edit.getText().toString().trim();
-                item.allow_cleartext_auth = this.allow_cleartext_auth_checkbox.isChecked();
-
-                item.username = this.username_edit != null
-                        ? this.username_edit.getText().toString() : "";
-                item.password = this.password_edit != null
-                        ? this.password_edit.getText().toString() : "";
-                item.user_agent = this.user_agent_edit != null
-                        ? this.user_agent_edit.getText().toString().trim() : "";
-
-                if (item.username.length() > 0 || item.password.length() > 0) {
-                    item.remember_creds = true;
-                }
-
-                if (item.is_valid()) {
-                    String name = item.name();
-                    if (this.mod_proxy_name != null && !name.equals(this.mod_proxy_name)) {
-                        proxy_list.remove(this.mod_proxy_name);
-                    }
-                    proxy_list.put(item);
-                    proxy_list.set_enabled(name);
-                    proxy_list.save();
-                    gen_ui_reset_event(false);
-                    finish();
-                    return;
-                }
+            if (proxy_list == null) {
+                Log.d(TAG, "proxy_list is null on save!");
+                finish();
                 return;
             }
-            Log.d(TAG, "proxy_list is null on save!");
-            finish();
+
+            Item item = new Item();
+
+            String friendly_name = this.friendly_name_edit != null
+                    ? this.friendly_name_edit.getText().toString().trim() : "";
+            if (friendly_name.length() > 0) {
+                item.friendly_name = friendly_name;
+            }
+
+            item.host = this.host_edit != null
+                    ? this.host_edit.getText().toString().trim() : "";
+            item.port = this.port_edit != null
+                    ? this.port_edit.getText().toString().trim() : "";
+            item.allow_cleartext_auth = this.allow_cleartext_auth_checkbox != null
+                    && this.allow_cleartext_auth_checkbox.isChecked();
+
+            item.username = this.username_edit != null
+                    ? this.username_edit.getText().toString() : "";
+            item.password = this.password_edit != null
+                    ? this.password_edit.getText().toString() : "";
+            item.user_agent = this.user_agent_edit != null
+                    ? this.user_agent_edit.getText().toString().trim() : "";
+
+            if (item.username.length() > 0 || item.password.length() > 0) {
+                item.remember_creds = true;
+            }
+
+            if (item.is_valid()) {
+                String name = item.name();
+                if (this.mod_proxy_name != null && !name.equals(this.mod_proxy_name)) {
+                    proxy_list.remove(this.mod_proxy_name);
+                }
+                proxy_list.put(item);
+                proxy_list.set_enabled(name);
+                proxy_list.save();
+                gen_ui_reset_event(false);
+                finish();
+            } else {
+                android.widget.Toast.makeText(this,
+                        "กรุณากรอก Host และ Port",
+                        android.widget.Toast.LENGTH_SHORT).show();
+            }
+
         } else if (viewid == R.id.proxy_cancel_button) {
             finish();
         }
     }
-
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (!action_enter(actionId, event)) {
