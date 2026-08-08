@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1C1C1E"
+    android:background="#121214"
     android:padding="16dp">
 
     <!-- หัวข้อ -->
@@ -13,7 +13,7 @@
         android:text="@string/log_title"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#111827"
+        android:textColor="#FFFFFF"
         android:paddingBottom="4dp" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="บันทึกการเชื่อมต่อ OpenVPN"
         android:textSize="13sp"
-        android:textColor="#6B7280"
+        android:textColor="#9CA3AF"
         android:paddingBottom="12dp" />
 
     <!-- การ์ด Log -->
@@ -30,8 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:background="@android:color/white"
-        android:elevation="2dp">
+        android:background="#2A2B30">
 
         <!-- หัวการ์ด -->
         <LinearLayout
@@ -42,13 +41,13 @@
             android:paddingEnd="14dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:background="#F8FAFC"
+            android:background="#232428"
             android:gravity="center_vertical">
 
             <View
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:background="#0EA5E9"
+                android:background="#F59E0B"
                 android:layout_marginEnd="8dp" />
 
             <TextView
@@ -58,7 +57,7 @@
                 android:text="Live Log"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#334155" />
+                android:textColor="#E5E7EB" />
 
             <TextView
                 android:id="@+id/log_status_label"
@@ -66,13 +65,13 @@
                 android:layout_height="wrap_content"
                 android:text="กำลังอัปเดต"
                 android:textSize="11sp"
-                android:textColor="#0EA5E9" />
+                android:textColor="#F59E0B" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E5E7EB" />
+            android:background="#3F3F46" />
 
         <!-- พื้นที่แสดง Log -->
         <ScrollView
@@ -90,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#1E293B"
+                android:textColor="#E5E7EB"
                 android:lineSpacingExtra="3dp"
                 android:fontFamily="monospace"
                 android:textIsSelectable="true" />
@@ -115,7 +114,7 @@
             android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:background="#EF4444"
+            android:background="#3F424A"
             android:visibility="gone" />
 
         <Button
@@ -127,8 +126,9 @@
             android:text="@string/log_resume"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:background="#0EA5E9"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:background="#F59E0B"
             android:visibility="gone" />
     </LinearLayout>
 
