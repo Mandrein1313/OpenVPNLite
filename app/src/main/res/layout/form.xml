@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1C1C1E">
+    android:background="#121212">
 
     <ScrollView
         android:id="@+id/main_scroll_view"
@@ -20,7 +20,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- โปรไฟล์ -->
+            <!-- โปรไฟล์ (เปลี่ยนพื้นหลังการ์ดเป็นสีเทาเข้ม #2C2C2E) -->
             <LinearLayout
                 android:id="@+id/profile_group"
                 android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <!-- สถานะ -->
+            <!-- สถานะ (ปรับพื้นหลังเป็น #2C2C2E และตัวหนังสือเป็นสีสว่าง) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
