@@ -22,28 +22,36 @@ public class OpenVPNLog extends OpenVPNClientBase implements OnClickListener {
     private TextView mStatusLabel;
     private ArrayList<LogMsg> pause_buffer;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.log);
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.log);
 
-        mTextView = (TextView) findViewById(R.id.log_textview);
-        mScrollView = (ScrollView) findViewById(R.id.log_scrollview);
-        mPause = (Button) findViewById(R.id.log_pause);
-        mResume = (Button) findViewById(R.id.log_resume);
-        mStatusLabel = (TextView) findViewById(R.id.log_status_label);
-
-        if (mPause != null) mPause.setOnClickListener(this);
-        if (mResume != null) mResume.setOnClickListener(this);
-
-        if (mTextView != null) {
-            mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
-            mTextView.setText("ยังไม่มีข้อมูล log\nรอการเชื่อมต่อหรือเหตุการณ์จาก VPN...");
-            mTextView.setTextColor(0xFF94A3B8);
-        }
-
-        doBindService();
+    // ซ่อนแถบชื่อแอป VPN THAI ด้านบน
+    if (getSupportActionBar() != null) {
+        getSupportActionBar().hide();
     }
+    if (getActionBar() != null) {
+        getActionBar().hide();
+    }
+
+    mTextView = (TextView) findViewById(R.id.log_textview);
+    mScrollView = (ScrollView) findViewById(R.id.log_scrollview);
+    mPause = (Button) findViewById(R.id.log_pause);
+    mResume = (Button) findViewById(R.id.log_resume);
+    mStatusLabel = (TextView) findViewById(R.id.log_status_label);
+
+    if (mPause != null) mPause.setOnClickListener(this);
+    if (mResume != null) mResume.setOnClickListener(this);
+
+    if (mTextView != null) {
+        mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        mTextView.setText("ยังไม่มีข้อมูล log\nรอการเชื่อมต่อหรือเหตุการณ์จาก VPN...");
+        mTextView.setTextColor(0xFF94A3B8);
+    }
+
+    doBindService();
+}
 
     private void set_pause_state(boolean paused) {
         if (paused) {
