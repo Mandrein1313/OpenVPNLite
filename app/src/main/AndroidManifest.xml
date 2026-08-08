@@ -38,19 +38,17 @@
                 android:value="vpn" />
         </service>
 
-        <!-- กำหนด theme ให้หน้าหลักใช้ NoActionBar เพื่อปิดแถบสีเทาตัวบน แล้วใช้แถบของแอปพร้อมปุ่ม 3 จุด -->
- <activity
-    android:name="net.openvpn.openvpn.OpenVPNClient"
-    android:exported="true"
-    android:configChanges="keyboardHidden|orientation"
-    android:launchMode="singleTask"
-    android:windowSoftInputMode="adjustPan">
-    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-</activity>
-
+        <activity
+            android:name="net.openvpn.openvpn.OpenVPNClient"
+            android:exported="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name="net.openvpn.openvpn.OpenVPNAttachmentReceiver"
@@ -76,20 +74,63 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="net.openvpn.openvpn.OpenVPNPrefs" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.FileDialog" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNStats" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNLog" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNAbout" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNImportProfile" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNAddProxy" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNAddShortcut" android:exported="false" />
-        <activity android:name="net.openvpn.openvpn.Info" android:exported="false" />
+        <!-- แก้ไข: เพิ่ม theme="@style/AppTheme" ให้หน้าตั้งค่า (Prefs) และหน้าอื่นๆ -->
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNPrefs" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.FileDialog" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNStats" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNLog" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNAbout" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNImportProfile" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNAddProxy" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNAddShortcut" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.Info" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+        <!-- แก้ไข: เปลี่ยน Theme.Dialog ของเดิมเป็นธีม Dialog มืดที่เราสร้างขึ้น -->
         <activity
             android:name="net.openvpn.openvpn.OpenVPNProxyCreds"
             android:exported="false"
-            android:theme="@android:style/Theme.Dialog" />
-        <activity android:name="net.openvpn.openvpn.OpenVPNHelp" android:exported="false" />
+            android:theme="@style/CustomDarkDialogActivity" />
+
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNHelp" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
         <activity
             android:name="net.openvpn.openvpn.OpenVPNDisconnect"
             android:exported="true"

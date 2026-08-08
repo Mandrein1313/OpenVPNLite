@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- เปลี่ยน parent เป็น Theme.AppCompat (Dark Theme) -->
+    <!-- ธีมหลักของแอป สด/มืด ทั้งหมด -->
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- สีพื้นหลังหลักของแอป -->
         <item name="android:windowBackground">#121212</item>
         <item name="colorPrimary">#1F1B24</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">#F59E0B</item>
 
-        <!-- กำหนดสีของ Status Bar และ Navigation Bar ด้านล่าง -->
+        <!-- ครอบคลุมหน้าตั้งค่า (Preference Screen) -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#9CA3AF</item>
+
+        <!-- ครอบคลุม Dialog และ Popup ทุกชนิด -->
+        <item name="dialogTheme">@style/CustomDarkDialog</item>
+        <item name="alertDialogTheme">@style/CustomDarkDialog</item>
+        <item name="android:dialogTheme">@style/CustomDarkDialog</item>
+        <item name="android:alertDialogTheme">@style/CustomDarkDialog</item>
+        
+        <!-- ครอบคลุม Popup Menu และ List Context Menu -->
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:popupMenuStyle">@style/CustomDarkPopupMenu</item>
+
+        <!-- สี Status Bar & Navigation Bar -->
         <item name="android:statusBarColor">#000000</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">#111827</item>
+    </style>
 
-        <!-- กำหนดสีข้อความพื้นฐานในธีม -->
+    <!-- สไตล์สำหรับ Alert Dialog / Pop-up -->
+    <style name="CustomDarkDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">#2C2C2E</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="android:textColorSecondary">#9CA3AF</item>
+        <item name="colorAccent">#F59E0B</item>
+    </style>
+
+    <!-- สไตล์สำหรับ Activity ที่แสดงผลแบบ Dialog (เช่น OpenVPNProxyCreds) -->
+    <style name="CustomDarkDialogActivity" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">#2C2C2E</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#9CA3AF</item>
+        <item name="colorAccent">#F59E0B</item>
+    </style>
+
+    <!-- สไตล์สำหรับ Popup Menu -->
+    <style name="CustomDarkPopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">#2C2C2E</item>
     </style>
 
     <style name="TextAppearance.Compat.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
