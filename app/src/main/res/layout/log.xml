@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F6F8"
+    android:background="#1C1C1E"
     android:padding="16dp">
 
     <!-- หัวข้อ -->
