@@ -31,33 +31,42 @@ public class OpenVPNAddProxy extends OpenVPNClientBase implements OnClickListene
     EditText password_edit;
     EditText user_agent_edit;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_proxy);
-        this.prefs = new PrefUtil(PreferenceManager.getDefaultSharedPreferences(this));
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.add_proxy);
 
-        this.title_textview = (TextView) findViewById(R.id.proxy_title);
-        this.friendly_name_edit = (EditText) findViewById(R.id.proxy_friendly_name);
-        this.host_edit = (EditText) findViewById(R.id.proxy_host);
-        this.port_edit = (EditText) findViewById(R.id.proxy_port);
-        this.username_edit = (EditText) findViewById(R.id.proxy_username);
-        this.password_edit = (EditText) findViewById(R.id.proxy_password);
-        this.user_agent_edit = (EditText) findViewById(R.id.proxy_user_agent);
-        this.allow_cleartext_auth_checkbox = (CheckBox) findViewById(R.id.proxy_allow_cleartext_auth_checkbox);
-        this.save_button = (Button) findViewById(R.id.proxy_save_button);
-        this.cancel_button = (Button) findViewById(R.id.proxy_cancel_button);
-
-        this.save_button.setOnClickListener(this);
-        this.cancel_button.setOnClickListener(this);
-        if (this.user_agent_edit != null) {
-            this.user_agent_edit.setOnEditorActionListener(this);
-        } else if (this.port_edit != null) {
-            this.port_edit.setOnEditorActionListener(this);
-        }
-
-        doBindService();
+    // ซ่อนแถบชื่อแอป VPN THAI ด้านบน
+    if (getSupportActionBar() != null) {
+        getSupportActionBar().hide();
     }
+    if (getActionBar() != null) {
+        getActionBar().hide();
+    }
+
+    this.prefs = new PrefUtil(PreferenceManager.getDefaultSharedPreferences(this));
+
+    this.title_textview = (TextView) findViewById(R.id.proxy_title);
+    this.friendly_name_edit = (EditText) findViewById(R.id.proxy_friendly_name);
+    this.host_edit = (EditText) findViewById(R.id.proxy_host);
+    this.port_edit = (EditText) findViewById(R.id.proxy_port);
+    this.username_edit = (EditText) findViewById(R.id.proxy_username);
+    this.password_edit = (EditText) findViewById(R.id.proxy_password);
+    this.user_agent_edit = (EditText) findViewById(R.id.proxy_user_agent);
+    this.allow_cleartext_auth_checkbox = (CheckBox) findViewById(R.id.proxy_allow_cleartext_auth_checkbox);
+    this.save_button = (Button) findViewById(R.id.proxy_save_button);
+    this.cancel_button = (Button) findViewById(R.id.proxy_cancel_button);
+
+    this.save_button.setOnClickListener(this);
+    this.cancel_button.setOnClickListener(this);
+    if (this.user_agent_edit != null) {
+        this.user_agent_edit.setOnEditorActionListener(this);
+    } else if (this.port_edit != null) {
+        this.port_edit.setOnEditorActionListener(this);
+    }
+
+    doBindService();
+}
 
     @Override
     public void onClick(View v) {
