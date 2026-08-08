@@ -65,6 +65,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+    implementation 'androidx.preference:preference:1.2.1'
 
     // รวมไฟล์ jar ในโฟลเดอร์ libs ทั้งหมด (ซึ่งมี zip4j อยู่แล้ว)
     implementation fileTree(include: ['*.jar'], dir: 'libs')
