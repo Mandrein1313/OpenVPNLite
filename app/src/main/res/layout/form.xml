@@ -67,7 +67,7 @@
                 </RelativeLayout>
             </LinearLayout>
 
-            <!-- ปุ่มเชื่อมต่อ -->
+<!-- ปุ่มเชื่อมต่อ -->
             <LinearLayout
                 android:id="@+id/button_group"
                 android:layout_width="match_parent"
@@ -81,24 +81,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginBottom="8dp"
-                    android:text="เชื่อมต่อ"
-                    android:textSize="17sp"
+                    android:text="CONNECT VPN"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="#FFFFFF"
-                    android:background="#0EA5E9"
+                    android:background="@drawable/btn_connect_bg"
+                    android:elevation="0dp"
+                    android:stateListAnimator="@null"
                     android:visibility="visible" />
 
                 <Button
                     android:id="@+id/disconnect"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="ตัดการเชื่อมต่อ"
-                    android:textSize="17sp"
+                    android:text="DISCONNECT"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="#FFFFFF"
-                    android:background="#DC2626"
+                    android:background="@drawable/btn_disconnect_bg"
+                    android:elevation="0dp"
+                    android:stateListAnimator="@null"
                     android:visibility="gone" />
             </LinearLayout>
 
