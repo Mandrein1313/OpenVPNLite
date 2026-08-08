@@ -22,118 +22,116 @@ public class OpenVPNLog extends OpenVPNClientBase implements OnClickListener {
     private TextView mStatusLabel;
     private ArrayList<LogMsg> pause_buffer;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log);
 
-        this.mTextView = (TextView) findViewById(R.id.log_textview);
-        this.mScrollView = (ScrollView) findViewById(R.id.log_scrollview);
-        this.mPause = (Button) findViewById(R.id.log_pause);
-        this.mResume = (Button) findViewById(R.id.log_resume);
-        this.mStatusLabel = (TextView) findViewById(R.id.log_status_label);
+        mTextView = (TextView) findViewById(R.id.log_textview);
+        mScrollView = (ScrollView) findViewById(R.id.log_scrollview);
+        mPause = (Button) findViewById(R.id.log_pause);
+        mResume = (Button) findViewById(R.id.log_resume);
+        mStatusLabel = (TextView) findViewById(R.id.log_status_label);
 
-        this.mPause.setOnClickListener(this);
-        this.mResume.setOnClickListener(this);
-        this.mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        if (mPause != null) mPause.setOnClickListener(this);
+        if (mResume != null) mResume.setOnClickListener(this);
 
-        // ข้อความเริ่มต้นเมื่อยังไม่มี log
-        this.mTextView.setText("ยังไม่มีข้อมูล log\nรอการเชื่อมต่อหรือเหตุการณ์จาก VPN...");
-        this.mTextView.setTextColor(0xFF94A3B8);
+        if (mTextView != null) {
+            mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+            mTextView.setText("ยังไม่มีข้อมูล log\nรอการเชื่อมต่อหรือเหตุการณ์จาก VPN...");
+            mTextView.setTextColor(0xFF94A3B8);
+        }
 
         doBindService();
     }
 
     private void set_pause_state(boolean paused) {
         if (paused) {
-            this.mPause.setVisibility(View.GONE);
-            this.mResume.setVisibility(View.VISIBLE);
-            this.pause_buffer = new ArrayList<>();
-            if (this.mStatusLabel != null) {
-                this.mStatusLabel.setText("หยุดชั่วคราว");
-                this.mStatusLabel.setTextColor(0xFFEF4444);
+            if (mPause != null) mPause.setVisibility(View.GONE);
+            if (mResume != null) mResume.setVisibility(View.VISIBLE);
+            pause_buffer = new ArrayList<>();
+            if (mStatusLabel != null) {
+                mStatusLabel.setText("หยุดชั่วคราว");
+                mStatusLabel.setTextColor(0xFFEF4444);
             }
         } else {
-            this.mPause.setVisibility(View.VISIBLE);
-            this.mResume.setVisibility(View.GONE);
-            if (this.mStatusLabel != null) {
-                this.mStatusLabel.setText("กำลังอัปเดต");
-                this.mStatusLabel.setTextColor(0xFF0EA5E9);
+            if (mPause != null) mPause.setVisibility(View.VISIBLE);
+            if (mResume != null) mResume.setVisibility(View.GONE);
+            if (mStatusLabel != null) {
+                mStatusLabel.setText("กำลังอัปเดต");
+                mStatusLabel.setTextColor(0xFF0EA5E9);
             }
-            if (this.pause_buffer != null) {
-                if (this.mTextView.getCurrentTextColor() == 0xFF94A3B8) {
-                    this.mTextView.setText("");
-                    this.mTextView.setTextColor(0xFF1E293B);
+            if (pause_buffer != null && mTextView != null) {
+                if (mTextView.getCurrentTextColor() == 0xFF94A3B8) {
+                    mTextView.setText("");
+                    mTextView.setTextColor(0xFF1E293B);
                 }
-                Iterator<LogMsg> it = this.pause_buffer.iterator();
-                while (it.hasNext()) {
-                    this.mTextView.append(it.next().line);
+                for (LogMsg lm : pause_buffer) {
+                    mTextView.append(lm.line);
                 }
                 scroll_textview_to_bottom();
-                this.pause_buffer = null;
+                pause_buffer = null;
             }
         }
     }
 
     private void scroll_textview_to_bottom() {
-        this.mScrollView.post(new Runnable() {
+        if (mScrollView == null || mTextView == null) return;
+        mScrollView.post(new Runnable() {
+            @Override
             public void run() {
-                OpenVPNLog.this.mScrollView.smoothScrollTo(0, OpenVPNLog.this.mTextView.getBottom());
+                mScrollView.smoothScrollTo(0, mTextView.getBottom());
             }
         });
     }
 
     private void refresh_log_view() {
         ArrayDeque<LogMsg> hist = log_history();
-        if (hist != null && !hist.isEmpty()) {
+        if (hist != null && !hist.isEmpty() && mTextView != null) {
             StringBuilder builder = new StringBuilder();
-            Iterator<LogMsg> it = hist.iterator();
-            while (it.hasNext()) {
-                builder.append(it.next().line);
+            for (LogMsg lm : hist) {
+                builder.append(lm.line);
             }
-            this.mTextView.setTextColor(0xFF1E293B);
-            this.mTextView.setText(builder.toString());
+            mTextView.setTextColor(0xFF1E293B);
+            mTextView.setText(builder.toString());
             scroll_textview_to_bottom();
         }
     }
 
+    @Override
     public void onClick(View v) {
-        Log.d(TAG, "LOG: onClick");
-        int viewid = v.getId();
-        if (viewid == R.id.log_pause) {
-            Log.d(TAG, "LOG: onClick PAUSE");
+        int id = v.getId();
+        if (id == R.id.log_pause) {
             set_pause_state(true);
-        } else if (viewid == R.id.log_resume) {
-            Log.d(TAG, "LOG: onClick RESUME");
+        } else if (id == R.id.log_resume) {
             set_pause_state(false);
         }
     }
 
     public void log(LogMsg lm) {
-        if (this.mTextView.getCurrentTextColor() == 0xFF94A3B8) {
-            this.mTextView.setText("");
-            this.mTextView.setTextColor(0xFF1E293B);
+        if (mTextView == null) return;
+
+        if (mTextView.getCurrentTextColor() == 0xFF94A3B8) {
+            mTextView.setText("");
+            mTextView.setTextColor(0xFF1E293B);
         }
 
-        if (this.pause_buffer == null) {
-            this.mTextView.append(lm.line);
+        if (pause_buffer == null) {
+            mTextView.append(lm.line);
             scroll_textview_to_bottom();
         } else {
-            this.pause_buffer.add(lm);
+            pause_buffer.add(lm);
         }
     }
 
+    @Override
     protected void onDestroy() {
-        Log.d(TAG, "LOG: onDestroy");
-        stop();
+        doUnbindService();
         super.onDestroy();
     }
 
-    private void stop() {
-        doUnbindService();
-    }
-
+    @Override
     protected void post_bind() {
-        Log.d(TAG, "LOG: post_bind");
         refresh_log_view();
         set_pause_state(false);
     }

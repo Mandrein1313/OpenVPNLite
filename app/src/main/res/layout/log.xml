@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -25,17 +24,16 @@
         android:textColor="#6B7280"
         android:paddingBottom="12dp" />
 
-    <!-- การ์ดแสดง Log -->
+    <!-- การ์ด Log -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:background="@android:color/white"
-        android:elevation="2dp"
-        android:padding="0dp">
+        android:elevation="2dp">
 
-        <!-- แถบหัวการ์ด -->
+        <!-- หัวการ์ด -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,20 +69,18 @@
                 android:textColor="#0EA5E9" />
         </LinearLayout>
 
-        <!-- เส้นคั่น -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#E5E7EB" />
 
-        <!-- พื้นที่ Log -->
+        <!-- พื้นที่แสดง Log -->
         <ScrollView
             android:id="@+id/log_scrollview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:scrollbars="vertical"
-            android:fadeScrollbars="false"
             android:padding="12dp"
             android:clipToPadding="false"
             android:fillViewport="true">
@@ -97,12 +93,11 @@
                 android:textColor="#1E293B"
                 android:lineSpacingExtra="3dp"
                 android:fontFamily="monospace"
-                android:textIsSelectable="true"
-                android:text="" />
+                android:textIsSelectable="true" />
         </ScrollView>
     </LinearLayout>
 
-    <!-- ปุ่มด้านล่าง -->
+    <!-- ปุ่ม -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -110,7 +105,7 @@
         android:paddingTop="14dp"
         android:gravity="center">
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/log_pause"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -119,13 +114,11 @@
             android:text="@string/log_pause"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:visibility="gone"
-            app:cornerRadius="10dp"
-            app:backgroundTint="#EF4444"
             android:textColor="#FFFFFF"
-            style="@style/Widget.MaterialComponents.Button" />
+            android:background="#EF4444"
+            android:visibility="gone" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/log_resume"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -134,11 +127,9 @@
             android:text="@string/log_resume"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:visibility="gone"
-            app:cornerRadius="10dp"
-            app:backgroundTint="#0EA5E9"
             android:textColor="#FFFFFF"
-            style="@style/Widget.MaterialComponents.Button" />
+            android:background="#0EA5E9"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

@@ -141,9 +141,9 @@
 	<string name="issued_on">ออกเมื่อ:</string>
 	<string name="issued_to">ออกให้:</string>
 	<string name="last_pkt_recv">ได้รับแพ็คเก็ต</string>
-	<string name="log_pause">หยุด</string>
-	<string name="log_resume">ประวัติย่อ</string>
-	<string name="log_title">ไฟล์บันทึก VPN</string>
+	<string name="log_pause">ปุ่มหยุดชั่วคราว</string>
+	<string name="log_resume">ทำงานต่อ</string>
+	<string name="log_title">หัวข้อหน้า Log</string>
 	<string name="lpr_1_sec_ago">1 วินาทีที่ผ่านมา</string>
 	<string name="lpr_gt_1_hour_ago">> 1 ชั่วโมงที่แล้ว</string>
 	<string name="lpr_gt_n_min_ago">>% d นาทีที่แล้ว</string>
