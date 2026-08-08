@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!-- เปลี่ยน parent เป็น Theme.AppCompat (Dark Theme) -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- สีพื้นหลังหลักของแอป -->
+        <item name="android:windowBackground">#121212</item>
+        <item name="colorPrimary">#1F1B24</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#F59E0B</item>
 
-        <!-- กำหนดให้ Status Bar ด้านบนเป็นสีดำ -->
+        <!-- กำหนดสีของ Status Bar และ Navigation Bar ด้านล่าง -->
         <item name="android:statusBarColor">#000000</item>
-        <!-- บังคับให้ไอคอน/ข้อความบน Status Bar เป็นสีสว่าง (สีขาว) -->
         <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">#111827</item>
+
+        <!-- กำหนดสีข้อความพื้นฐานในธีม -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#9CA3AF</item>
     </style>
 
     <style name="TextAppearance.Compat.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
     <style name="TextAppearance.Compat.Notification.Info" parent="@style/TextAppearance.Compat.Notification">
         <item name="android:textSize">12.0sp</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textColor">#9CA3AF</item>
     </style>
     <style name="TextAppearance.Compat.Notification.Time" parent="@style/TextAppearance.Compat.Notification">
         <item name="android:textSize">12.0sp</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textColor">#9CA3AF</item>
     </style>
     <style name="TextAppearance.Compat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title" />
     <style name="Widget.Compat.NotificationActionContainer" parent="" />
@@ -38,6 +44,7 @@
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:layout_width">240.0sp</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
     <style name="edit">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
@@ -45,12 +52,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:inputType">textNoSuggestions</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorHint">#6B7280</item>
     </style>
     <style name="footer">
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#9CA3AF</item>
     </style>
 
     <style name="group">
@@ -82,17 +92,20 @@
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
     <style name="item_wrap">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
     <style name="label">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
     <style name="prop_image">
         <item name="android:layout_width">wrap_content</item>
@@ -114,7 +127,7 @@
     </style>
     <style name="stats_boxed">
         <item name="android:orientation">vertical</item>
-        <item name="android:background">@drawable/stats_box</item>
+        <item name="android:background">#2C2C2E</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -127,12 +140,14 @@
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#F59E0B</item>
     </style>
     <style name="stats_key">
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:paddingLeft">16.0sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#9CA3AF</item>
     </style>
     <style name="stats_row">
         <item name="android:layout_width">wrap_content</item>
@@ -153,15 +168,18 @@
         <item name="android:paddingLeft">16.0sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
     <style name="subtitle">
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#9CA3AF</item>
     </style>
     <style name="title">
         <item name="android:textAppearance">?android:textAppearanceLarge</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 </resources>
