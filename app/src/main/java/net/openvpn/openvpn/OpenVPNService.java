@@ -681,16 +681,30 @@ public class OpenVPNService extends VpnService implements Handler.Callback, net.
             return this.connect_intent;
         }
 
-        public void client_api_config(ClientAPI_Config config) {
-            if (this.proxy != null) {
-                config.setProxyHost(this.proxy.host);
-                config.setProxyPort(this.proxy.port);
-                if (this.proxy_username != null && this.proxy_password != null) {
-                    config.setProxyUsername(this.proxy_username);
-                    config.setProxyPassword(this.proxy_password);
-                }
-                config.setProxyAllowCleartextAuth(this.proxy.allow_cleartext_auth);
+public void client_api_config(ClientAPI_Config config) {
+            if (this.proxy == null) {
+                return;
             }
+
+            // ต้องมี host และ port ครบก่อนส่งเข้า OpenVPN
+            String host = this.proxy.host != null ? this.proxy.host.trim() : "";
+            String port = this.proxy.port != null ? this.proxy.port.trim() : "";
+
+            if (host.length() == 0 || port.length() == 0) {
+                Log.w(TAG, "Skip http-proxy: host or port is empty");
+                return;
+            }
+
+            config.setProxyHost(host);
+            config.setProxyPort(port);
+
+            if (this.proxy_username != null && this.proxy_password != null
+                    && this.proxy_username.length() > 0) {
+                config.setProxyUsername(this.proxy_username);
+                config.setProxyPassword(this.proxy_password);
+            }
+
+            config.setProxyAllowCleartextAuth(this.proxy.allow_cleartext_auth);
         }
 
         public boolean should_launch_creds_dialog() {
