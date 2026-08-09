@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- หมวดการเชื่อมต่อ -->
+    <PreferenceCategory
+        android:title="การเชื่อมต่อ"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:key="pause_vpn_on_blanked_screen"
+            android:title="@string/pause_vpn_on_blanked_screen_title"
+            android:summary="@string/pause_vpn_on_blanked_screen_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="tun_persist"
+            android:title="@string/tun_persist_title"
+            android:summary="@string/tun_persist_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="autostart"
+            android:title="@string/autostart_title"
+            android:summary="@string/autostart_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="autostart_finish_on_connect"
+            android:title="@string/autostart_finish_on_connect_title"
+            android:summary="@string/autostart_finish_on_connect_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="vpn_proto"
+            android:title="@string/vpn_proto_title"
+            android:summary="@string/vpn_proto_summary"
+            android:entries="@array/vpn_proto_array"
+            android:entryValues="@array/vpn_proto_values"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="ipv6"
+            android:title="@string/ipv6_title"
+            android:summary="@string/ipv6_summary"
+            android:entries="@array/ipv6_array"
+            android:entryValues="@array/ipv6_values"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="conn_timeout"
+            android:title="@string/conn_timeout_title"
+            android:summary="@string/conn_timeout_summary"
+            android:entries="@array/conn_timeout_array"
+            android:entryValues="@array/conn_timeout_values"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="compression_mode"
+            android:title="@string/compression_title"
+            android:summary="@string/compression_summary"
+            android:entries="@array/compression_array"
+            android:entryValues="@array/compression_values"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <!-- หมวดความปลอดภัย -->
+    <PreferenceCategory
+        android:title="ความปลอดภัย"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:key="force_aes_cbc_ciphersuites_v2"
+            android:title="@string/force_aes_cbc_ciphersuites_title"
+            android:summary="@string/force_aes_cbc_ciphersuites_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="cert_profile_insecure"
+            android:title="@string/cert_profile_insecure_title"
+            android:summary="@string/cert_profile_insecure_summary"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <ListPreference
+            android:key="tls_version_min_override"
+            android:title="@string/tls_version_min_override_title"
+            android:summary="@string/tls_version_min_override_summary"
+            android:entries="@array/tls_version_min_override_array"
+            android:entryValues="@array/tls_version_min_override_values"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="google_dns_fallback"
+            android:title="@string/google_dns_fallback_title"
+            android:summary="@string/google_dns_fallback_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <!-- หมวดหน้าตาและการแจ้งเตือน -->
+    <PreferenceCategory
+        android:title="หน้าตาและการแจ้งเตือน"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:key="auto_keyboard"
+            android:title="@string/auto_keyboard_title"
+            android:summary="@string/auto_keyboard_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="enable_notifications"
+            android:title="@string/enable_notifications_title"
+            android:summary="@string/enable_notifications_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+            android:key="ui_dark_theme"
+            android:title="@string/ui_dark_theme_title"
+            android:summary="@string/ui_dark_theme_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
