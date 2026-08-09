@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string name="dns_title">เซิร์ฟเวอร์ DNS</string>
+<string name="dns_summary">เลือก DNS ที่จะใช้ตอนเชื่อมต่อ VPN</string>
 	<string name="jk">เป็นเวอร์ชั่นล่าสุดแล้ว</string>
 	<string name="bk">กรุณารอสักครู่...</string>
 	<string name="oks">ตกลง</string>

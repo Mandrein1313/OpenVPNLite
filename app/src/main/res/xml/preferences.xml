@@ -66,6 +66,16 @@
             android:entries="@array/compression_array"
             android:entryValues="@array/compression_values"
             app:iconSpaceReserved="false" />
+
+        <!-- DNS -->
+        <ListPreference
+            android:key="dns_server"
+            android:title="@string/dns_title"
+            android:summary="@string/dns_summary"
+            android:entries="@array/dns_array"
+            android:entryValues="@array/dns_values"
+            android:defaultValue="auto"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <!-- หมวดความปลอดภัย -->

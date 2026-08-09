@@ -681,7 +681,7 @@ public class OpenVPNService extends VpnService implements Handler.Callback, net.
             return this.connect_intent;
         }
 
-public void client_api_config(ClientAPI_Config config) {
+        public void client_api_config(ClientAPI_Config config) {
             if (this.proxy == null) {
                 return;
             }
@@ -1236,7 +1236,32 @@ public void client_api_config(ClientAPI_Config config) {
         this.enable_notifications = this.prefs.get_boolean("enable_notifications", false);
         OpenVPNClientThread thread = new OpenVPNClientThread();
         ClientAPI_Config config = new ClientAPI_Config();
-        config.setContent(profile_content);
+
+        // ระบบเลือก DNS
+        String dnsOption = this.prefs.get_string("dns_server");
+        if (dnsOption == null) dnsOption = "auto";
+
+        StringBuilder contentBuilder = new StringBuilder(profile_content != null ? profile_content : "");
+        if (!"auto".equals(dnsOption)) {
+            // ลบ dhcp-option DNS เดิมออกก่อน
+            String cleaned = contentBuilder.toString()
+                    .replaceAll("(?m)^\\s*dhcp-option\\s+DNS\\s+\\S+\\s*$", "");
+            contentBuilder = new StringBuilder(cleaned.trim());
+            contentBuilder.append("\n");
+
+            if ("cloudflare".equals(dnsOption)) {
+                contentBuilder.append("dhcp-option DNS 1.1.1.1\n");
+                contentBuilder.append("dhcp-option DNS 1.0.0.1\n");
+            } else if ("google".equals(dnsOption)) {
+                contentBuilder.append("dhcp-option DNS 8.8.8.8\n");
+                contentBuilder.append("dhcp-option DNS 8.8.4.4\n");
+            } else if ("cloudflare_google".equals(dnsOption)) {
+                contentBuilder.append("dhcp-option DNS 1.1.1.1\n");
+                contentBuilder.append("dhcp-option DNS 1.0.0.1\n");
+                contentBuilder.append("dhcp-option DNS 8.8.8.8\n");
+            }
+        }
+        config.setContent(contentBuilder.toString());
         config.setInfo(true);
 
         if (server != null) config.setServerOverride(server);
