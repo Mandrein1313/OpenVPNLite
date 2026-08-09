@@ -1353,15 +1353,15 @@ public class OpenVPNClient extends OpenVPNClientBase implements OnRequestPermiss
                 if (this.button_group != null) this.button_group.setVisibility(View.VISIBLE);
                 if (this.status_view != null) this.status_view.setVisibility(View.VISIBLE);
                 
-                if (orig_active) {
-                    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE);
-                    if (this.connect_button != null) this.connect_button.setVisibility(View.GONE);
-                    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.VISIBLE);
-                } else {
-                    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.GONE);
-                    if (this.connect_button != null) this.connect_button.setVisibility(View.VISIBLE);
-                    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.GONE);
-                }
+if (orig_active) {
+    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE);
+    if (this.connect_button != null) this.connect_button.setVisibility(View.GONE);
+    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.VISIBLE);
+} else {
+    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE); // เปลี่ยนจาก GONE เป็น VISIBLE
+    if (this.connect_button != null) this.connect_button.setVisibility(View.VISIBLE);
+    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.GONE);
+}
                 if (focus != null) {
                     autostart = RETAIN_AUTH;
                 }
