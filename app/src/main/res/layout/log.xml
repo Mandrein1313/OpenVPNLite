@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121214"
+    android:padding="16dp">
+
+    <!-- หัวข้อ -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="บันทึกการเชื่อมต่อ OpenVPN"
+        android:textSize="13sp"
+        android:textColor="#9CA3AF"
+        android:paddingBottom="12dp" />
+
+    <!-- การ์ด Log -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="#2A2B30">
+
+        <!-- หัวการ์ด -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="#232428"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="#F59E0B"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Live Log"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#E5E7EB" />
+
+            <TextView
+                android:id="@+id/log_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="กำลังอัปเดต"
+                android:textSize="11sp"
+                android:textColor="#F59E0B" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#3F3F46" />
+
+        <!-- พื้นที่แสดง Log -->
+        <ScrollView
+            android:id="@+id/log_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:padding="12dp"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <TextView
+                android:id="@+id/log_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#E5E7EB"
+                android:lineSpacingExtra="3dp"
+                android:fontFamily="monospace"
+                android:textIsSelectable="true" />
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- ปุ่ม -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="14dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/log_pause"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:text="@string/log_pause"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:background="#3F424A"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/log_resume"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:text="@string/log_resume"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:background="#F59E0B"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>
