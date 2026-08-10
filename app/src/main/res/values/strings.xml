@@ -22,8 +22,8 @@
 	<string name="advanced_menu">ขั้นสูง</string>
 	<string name="alt_proxy_summary">เปิดใช้งานพร็อกซี่อุโมงค์ส่วนตัว (สำหรับโปรไฟล์อุโมงค์ส่วนตัวเท่านั้น)</string>
 	<string name="alt_proxy_title">พร็อกซี่อุโมงค์ส่วนตัว</string>
-	<string name="app">VPN THAI</string>
-	<string name="app_shortcut_title">VPN THAI</string>
+	<string name="app">OpenVPNLite</string>
+	<string name="app_shortcut_title">OpenVPNLite</string>
 	<string name="apprate_dismiss">ไม่เป็นไรขอบคุณ</string>
 	<string name="apprate_message">หากคุณสนุกกับการใช้% s โปรดสละเวลาให้คะแนน ขอบคุณสำหรับการสนับสนุน!</string>
 	<string name="apprate_rate">ให้คะแนนมัน!</string>
