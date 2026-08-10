@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#121214"
-    android:padding="16dp">
+    android:padding="20dp">
 
     <!-- การ์ดหลัก -->
     <LinearLayout
@@ -60,14 +60,14 @@
             android:lineSpacingExtra="4dp"
             android:minHeight="48dp" />
 
-        <!-- แถบโหลด -->
+        <!-- แถบโหลดแบบเต็ม (สวยทันสมัย) -->
         <ProgressBar
             android:id="@+id/progress_update"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:visibility="gone"
-            android:indeterminate="true"
+            android:indeterminate="false"
             style="@android:style/Widget.ProgressBar.Horizontal" />
 
         <TextView
@@ -81,7 +81,7 @@
 
     </LinearLayout>
 
-    <!-- ปุ่ม (วางอยู่นอกการ์ดตรงตามระนาบในภาพ) -->
+    <!-- ปุ่ม -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
