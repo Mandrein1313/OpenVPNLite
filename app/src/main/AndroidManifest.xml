@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <application
+        android:name="net.openvpn.openvpn.OpenVPNApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/icon"
+        android:label="@string/app"
+        android:theme="@style/AppTheme"
+        tools:targetApi="34">
+
+        <service
+            android:name="net.openvpn.openvpn.OpenVPNService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:foregroundServiceType="specialUse">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="vpn" />
+        </service>
+
+        <activity
+            android:name="net.openvpn.openvpn.OpenVPNClient"
+            android:exported="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="net.openvpn.openvpn.OpenVPNAttachmentReceiver"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/x-openvpn-profile" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:pathPattern=".*\\.ovpn" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:pathPattern=".*\\.ovpn"
+                    android:scheme="file" />
+            </intent-filter>
+        </activity>
+
+        <!-- แก้ไข: เพิ่ม theme="@style/AppTheme" ให้หน้าตั้งค่า (Prefs) และหน้าอื่นๆ -->
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNPrefs" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.FileDialog" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNStats" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNLog" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNAbout" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNImportProfile" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNAddProxy" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNAddShortcut" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+            
+        <activity 
+            android:name="net.openvpn.openvpn.Info" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+        <!-- แก้ไข: เปลี่ยน Theme.Dialog ของเดิมเป็นธีม Dialog มืดที่เราสร้างขึ้น -->
+        <activity
+            android:name="net.openvpn.openvpn.OpenVPNProxyCreds"
+            android:exported="false"
+            android:theme="@style/CustomDarkDialogActivity" />
+
+        <activity 
+            android:name="net.openvpn.openvpn.OpenVPNHelp" 
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name="net.openvpn.openvpn.OpenVPNDisconnect"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+
+    </application>
+</manifest>
