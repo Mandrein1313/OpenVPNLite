@@ -14,7 +14,6 @@
         android:background="#2A2B30"
         android:padding="20dp">
 
-        <!-- หัวข้อ -->
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             android:textStyle="bold"
             android:textColor="#FFFFFF" />
 
-        <!-- เวอร์ชัน -->
         <TextView
             android:id="@+id/tv_version"
             android:layout_width="match_parent"
@@ -33,7 +31,6 @@
             android:textSize="13sp"
             android:textColor="#9CA3AF" />
 
-        <!-- เส้นคั่น -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -41,7 +38,6 @@
             android:layout_marginBottom="14dp"
             android:background="#3F3F46" />
 
-        <!-- รายละเอียด / changelog -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +56,7 @@
             android:lineSpacingExtra="4dp"
             android:minHeight="48dp" />
 
-        <!-- แถบโหลดแบบเต็ม (สวยทันสมัย) -->
+        <!-- แถบโหลดช้า + สีส้มชัด -->
         <ProgressBar
             android:id="@+id/progress_update"
             android:layout_width="match_parent"

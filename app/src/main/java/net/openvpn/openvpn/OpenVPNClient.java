@@ -555,7 +555,6 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
             }
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // ตรวจสอบ Content-Length เพื่อความแม่นยำ
                 totalBytes = conn.getContentLength();
                 Log.d("Update", "Total file size: " + totalBytes + " bytes");
 
@@ -566,14 +565,14 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
                     byte[] buffer = new byte[8192];
                     int bytesRead;
                     long totalRead = 0;
-                    int lastProgress = 0;
 
+                    // === ทำช้า + สีส้มชัดเจน ===
                     while ((bytesRead = in.read(buffer)) != -1) {
                         out.write(buffer, 0, bytesRead);
                         totalRead += bytesRead;
 
-                        // อัพเดท UI ทุก 500ms (เพื่อความ smooth)
-                        if (System.currentTimeMillis() % 500 < 50) {
+                        // อัพเดททุก 400ms (ทำให้ดูช้าและชัด)
+                        if (System.currentTimeMillis() % 400 < 40) {
                             final int progress = (totalBytes > 0) ? (int) ((totalRead * 100) / totalBytes) : 0;
                             final int finalProgress = progress;
                             mainHandler.post(() -> {
@@ -622,7 +621,6 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
 
         final boolean success = isSuccessExtracted;
         final String errorText = errorMessage;
-        final int finalTotal = totalBytes;
 
         mainHandler.post(() -> {
             if (activity.isFinishing() || activity.isDestroyed()) return;
