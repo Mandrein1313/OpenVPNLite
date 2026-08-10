@@ -556,22 +556,17 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 totalBytes = conn.getContentLength();
-                Log.d("Update", "Total file size: " + totalBytes + " bytes");
-
                 zipFile = new File(activity.getFilesDir(), "Configs.zip");
                 try (InputStream in = conn.getInputStream();
                      OutputStream out = new FileOutputStream(zipFile)) {
-                    
                     byte[] buffer = new byte[8192];
                     int bytesRead;
                     long totalRead = 0;
 
-                    // === ทำช้า + สีส้มชัดเจน ===
                     while ((bytesRead = in.read(buffer)) != -1) {
                         out.write(buffer, 0, bytesRead);
                         totalRead += bytesRead;
 
-                        // อัพเดททุก 400ms (ทำให้ดูช้าและชัด)
                         if (System.currentTimeMillis() % 400 < 40) {
                             final int progress = (totalBytes > 0) ? (int) ((totalRead * 100) / totalBytes) : 0;
                             final int finalProgress = progress;
@@ -590,9 +585,7 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
 
                 cleanOldFiles();
                 ZipFile zip = new ZipFile(zipFile);
-                if (zip.isEncrypted()) {
-                    zip.setPassword(OpenVPNClient.ZIP_PASSWORD);
-                }
+                if (zip.isEncrypted()) zip.setPassword(OpenVPNClient.ZIP_PASSWORD);
                 zip.extractAll(activity.getFilesDir().getAbsolutePath());
                 if (zipFile.exists()) zipFile.delete();
 
