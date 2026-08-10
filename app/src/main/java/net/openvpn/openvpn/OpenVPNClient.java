@@ -2108,116 +2108,119 @@ if (orig_active) {
         }
     }
 
-    private void load_ui_elements() {
-        this.main_scroll_view = (ScrollView) findViewById(R.id.main_scroll_view);
-        this.post_import_help_blurb = findViewById(R.id.post_import_help_blurb);
-        this.profile_group = findViewById(R.id.profile_group);
-        this.proxy_group = findViewById(R.id.proxy_group);
-        this.server_group = findViewById(R.id.server_group);
-        this.username_group = findViewById(R.id.username_group);
-        this.password_group = findViewById(R.id.password_group);
-        this.pk_password_group = findViewById(R.id.pk_password_group);
-        this.cr_group = findViewById(R.id.cr_group);
-        this.conn_details_group = findViewById(R.id.conn_details_group);
-        this.stats_group = findViewById(R.id.stats_group);
-        this.stats_expansion_group = findViewById(R.id.stats_expansion_group);
-        this.info_group = findViewById(R.id.info_group);
-        this.button_group = findViewById(R.id.button_group);
-        this.profile_spin = (Spinner) findViewById(R.id.profile);
-        this.profile_edit = (ImageButton) findViewById(R.id.profile_edit);
-        this.proxy_spin = (Spinner) findViewById(R.id.proxy);
-        this.proxy_edit = (ImageButton) findViewById(R.id.proxy_edit);
-        this.server_spin = (Spinner) findViewById(R.id.server);
-        this.challenge_view = (TextView) findViewById(R.id.challenge);
-        this.username_edit = (EditText) findViewById(R.id.username);
-        this.password_edit = (EditText) findViewById(R.id.password);
-        this.pk_password_edit = (EditText) findViewById(R.id.pk_password);
-        this.response_edit = (EditText) findViewById(R.id.response);
-        this.password_save_checkbox = (CheckBox) findViewById(R.id.password_save);
-        this.pk_password_save_checkbox = (CheckBox) findViewById(R.id.pk_password_save);
-        this.status_view = (TextView) findViewById(R.id.status);
-        this.status_icon_view = (ImageView) findViewById(R.id.status_icon);
-        this.progress_bar = (ProgressBar) findViewById(R.id.progress);
-        this.connect_button = (Button) findViewById(R.id.connect);
-        this.disconnect_button = (Button) findViewById(R.id.disconnect);
-        this.details_more_less = (TextView) findViewById(R.id.details_more_less);
-        this.last_pkt_recv_view = (TextView) findViewById(R.id.last_pkt_recv);
-        this.duration_view = (TextView) findViewById(R.id.duration);
-        this.bytes_in_view = (TextView) findViewById(R.id.bytes_in);
-        this.bytes_out_view = (TextView) findViewById(R.id.bytes_out);
-        
-        if (this.connect_button != null) this.connect_button.setOnClickListener(this);
-        if (this.disconnect_button != null) this.disconnect_button.setOnClickListener(this);
-        if (this.profile_spin != null) {
-            this.profile_spin.setOnItemSelectedListener(this);
-            registerForContextMenu(this.profile_spin);
-        }
-        if (this.proxy_spin != null) {
-            this.proxy_spin.setOnItemSelectedListener(this);
-            registerForContextMenu(this.proxy_spin);
-        }
-        if (this.server_spin != null) this.server_spin.setOnItemSelectedListener(this);
-        
-        View connDetails = findViewById(R.id.conn_details_boxed);
-        if (connDetails != null) connDetails.setOnTouchListener(this);
-        
-        if (this.profile_edit != null) {
-            this.profile_edit.setOnClickListener(this);
-            registerForContextMenu(this.profile_edit);
-        }
-        if (this.proxy_edit != null) {
-            this.proxy_edit.setOnClickListener(this);
-            registerForContextMenu(this.proxy_edit);
-        }
-        
-        if (this.username_edit != null) this.username_edit.setOnEditorActionListener(this);
-        if (this.password_edit != null) this.password_edit.setOnEditorActionListener(this);
-        if (this.pk_password_edit != null) this.pk_password_edit.setOnEditorActionListener(this);
-        if (this.response_edit != null) this.response_edit.setOnEditorActionListener(this);
-        
-        this.textgroups = new View[]{this.cr_group, this.password_group, this.pk_password_group, this.username_group};
-        this.textviews = new EditText[]{this.response_edit, this.password_edit, this.pk_password_edit, this.username_edit};
+private void load_ui_elements() {
+    this.main_scroll_view = (ScrollView) findViewById(R.id.main_scroll_view);
+    this.post_import_help_blurb = findViewById(R.id.post_import_help_blurb);
+    this.profile_group = findViewById(R.id.profile_group);
+    this.proxy_group = findViewById(R.id.proxy_group);
+    this.server_group = findViewById(R.id.server_group);
+    this.username_group = findViewById(R.id.username_group);
+    this.password_group = findViewById(R.id.password_group);
+    this.pk_password_group = findViewById(R.id.pk_password_group);
+    this.cr_group = findViewById(R.id.cr_group);
+    this.conn_details_group = findViewById(R.id.conn_details_group);
+    this.stats_group = findViewById(R.id.stats_group);
+    this.stats_expansion_group = findViewById(R.id.stats_expansion_group);
+    this.info_group = findViewById(R.id.info_group);
+    this.button_group = findViewById(R.id.button_group);
+    this.profile_spin = (Spinner) findViewById(R.id.profile);
+    this.profile_edit = (ImageButton) findViewById(R.id.profile_edit);
+    this.proxy_spin = (Spinner) findViewById(R.id.proxy);
+    this.proxy_edit = (ImageButton) findViewById(R.id.proxy_edit);
+    this.server_spin = (Spinner) findViewById(R.id.server);
+    this.challenge_view = (TextView) findViewById(R.id.challenge);
+    this.username_edit = (EditText) findViewById(R.id.username);
+    this.password_edit = (EditText) findViewById(R.id.password);
+    this.pk_password_edit = (EditText) findViewById(R.id.pk_password);
+    this.response_edit = (EditText) findViewById(R.id.response);
+    this.password_save_checkbox = (CheckBox) findViewById(R.id.password_save);
+    this.pk_password_save_checkbox = (CheckBox) findViewById(R.id.pk_password_save);
+    this.status_view = (TextView) findViewById(R.id.status);
+    this.status_icon_view = (ImageView) findViewById(R.id.status_icon);
+    this.progress_bar = (ProgressBar) findViewById(R.id.progress);
+    this.connect_button = (Button) findViewById(R.id.connect);
+    this.disconnect_button = (Button) findViewById(R.id.disconnect);
+    this.details_more_less = (TextView) findViewById(R.id.details_more_less);
+    this.last_pkt_recv_view = (TextView) findViewById(R.id.last_pkt_recv);
+    this.duration_view = (TextView) findViewById(R.id.duration);
+    this.bytes_in_view = (TextView) findViewById(R.id.bytes_in);
+    this.bytes_out_view = (TextView) findViewById(R.id.bytes_out);
 
-        com.google.android.material.bottomappbar.BottomAppBar bottomBar = findViewById(R.id.bottom_bar);
-        if (bottomBar != null) {
-            bottomBar.setOnMenuItemClickListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.bottom_home) {
-                    Toast.makeText(this, "กำลังตรวจสอบอัปเดต...", Toast.LENGTH_SHORT).show();
-                    if (updateManager != null) {
-                        updateManager.checkUpdateManual();
-                    } else {
-                        Toast.makeText(this, "ระบบอัปเดตยังไม่พร้อม", Toast.LENGTH_SHORT).show();
-                    }
-                    return true;
-                } else if (id == R.id.bottom_settings) {
-                    startActivityForResult(new Intent(this, OpenVPNPrefs.class), 0);
-                    return true;
-                } else if (id == R.id.bottom_more) {
-// ใช้ Context ที่มีธีมมืด
-android.view.ContextThemeWrapper darkContext = new android.view.ContextThemeWrapper(this, R.style.AppTheme);
-android.widget.PopupMenu popup = new android.widget.PopupMenu(darkContext, bottomBar);
-popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
-popup.setOnMenuItemClickListener(this::onOptionsItemSelected);
-popup.show();
-                    return true;
-                }
-                return false;
-            });
-        }
+    if (this.connect_button != null) this.connect_button.setOnClickListener(this);
+    if (this.disconnect_button != null) this.disconnect_button.setOnClickListener(this);
 
-        View fabMenu = findViewById(R.id.fab_menu);
-        if (fabMenu != null) {
-            fabMenu.setOnClickListener(v -> {
-                request_file_selection_dialog(S_ONSTART_CALLED);
-            });
-        }
-
-        if (this.button_group != null) {
-            this.button_group.setVisibility(View.VISIBLE);
-        }
-        if (this.connect_button != null) {
-            this.connect_button.setVisibility(View.VISIBLE);
-        }
+    if (this.profile_spin != null) {
+        this.profile_spin.setOnItemSelectedListener(this);
+        registerForContextMenu(this.profile_spin);
     }
-}
+    if (this.proxy_spin != null) {
+        this.proxy_spin.setOnItemSelectedListener(this);
+        registerForContextMenu(this.proxy_spin);
+    }
+    if (this.server_spin != null) this.server_spin.setOnItemSelectedListener(this);
+
+    View connDetails = findViewById(R.id.conn_details_boxed);
+    if (connDetails != null) connDetails.setOnTouchListener(this);
+
+    if (this.profile_edit != null) {
+        this.profile_edit.setOnClickListener(this);
+        registerForContextMenu(this.profile_edit);
+    }
+    if (this.proxy_edit != null) {
+        this.proxy_edit.setOnClickListener(this);
+        registerForContextMenu(this.proxy_edit);
+    }
+
+    if (this.username_edit != null) this.username_edit.setOnEditorActionListener(this);
+    if (this.password_edit != null) this.password_edit.setOnEditorActionListener(this);
+    if (this.pk_password_edit != null) this.pk_password_edit.setOnEditorActionListener(this);
+    if (this.response_edit != null) this.response_edit.setOnEditorActionListener(this);
+
+    this.textgroups = new View[]{this.cr_group, this.password_group, this.pk_password_group, this.username_group};
+    this.textviews = new EditText[]{this.response_edit, this.password_edit, this.pk_password_edit, this.username_edit};
+
+    // =============================================
+    // 🔥 แถบเมนูด้านบน (BottomAppBar) - ตามที่คุณต้องการ
+    // =============================================
+    com.google.android.material.bottomappbar.BottomAppBar bottomBar = findViewById(R.id.bottom_bar);
+    if (bottomBar != null) {
+        bottomBar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.menu_home) {
+                Toast.makeText(this, "กำลังตรวจสอบอัปเดต...", Toast.LENGTH_SHORT).show();
+                if (updateManager != null) {
+                    updateManager.checkUpdateManual();
+                } else {
+                    Toast.makeText(this, "ระบบอัปเดตยังไม่พร้อม", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            } else if (id == R.id.menu_settings) {
+                startActivityForResult(new Intent(this, OpenVPNPrefs.class), 0);
+                return true;
+            } else if (id == R.id.menu_more) {
+                android.view.ContextThemeWrapper darkContext = new android.view.ContextThemeWrapper(this, R.style.AppTheme);
+                android.widget.PopupMenu popup = new android.widget.PopupMenu(darkContext, bottomBar);
+                popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(this::onOptionsItemSelected);
+                popup.show();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    // ฟังก์ชันอื่นๆ (เหมือนเดิม)
+    View fabMenu = findViewById(R.id.fab_menu);
+    if (fabMenu != null) {
+        fabMenu.setOnClickListener(v -> {
+            request_file_selection_dialog(S_ONSTART_CALLED);
+        });
+    }
+
+    if (this.button_group != null) {
+        this.button_group.setVisibility(View.VISIBLE);
+    }
+    if (this.connect_button != null) {
+        this.connect_button.setVisibility(View.VISIBLE);
+    }
+}}
