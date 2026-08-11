@@ -1194,7 +1194,7 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
         if (this.response_edit != null) this.response_edit.setText("");
     }
 
-    private void ui_setup(boolean active, int flags, String profile_override) {
+private void ui_setup(boolean active, int flags, String profile_override) {
         boolean orig_active = active;
         boolean autostart = RETAIN_AUTH;
         cancel_ui_reset();
@@ -1253,176 +1253,171 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
                 if (this.profile_group != null) this.profile_group.setVisibility(View.VISIBLE);
                 if (this.profile_spin != null) this.profile_spin.setEnabled(!active);
                 if (this.profile_edit != null) this.profile_edit.setVisibility(active ? View.GONE : View.VISIBLE);
-// อัปเดตข้อความบนการ์ดโปรไฟล์
-if (this.profile_name_text != null && prof != null) {
-    this.profile_name_text.setText(prof.get_name());
-}
 
-if (this.profile_group != null) this.profile_group.setVisibility(View.VISIBLE);
-if (this.profile_spin != null) this.profile_spin.setEnabled(!active);
-if (this.profile_edit != null) this.profile_edit.setVisibility(active ? View.GONE : View.VISIBLE);
-            if (prof != null) {
-                if ((UIF_RESET & flags) != 0) {
-                    prof.reset_dynamic_challenge();
-                }
-                EditText focus = null;
-                if (!active && (flags & 32) != 0) {
-                    if (this.post_import_help_blurb != null) this.post_import_help_blurb.setVisibility(View.VISIBLE);
-                } else if (active) {
+                if (prof != null) {
+                    if ((UIF_RESET & flags) != 0) {
+                        prof.reset_dynamic_challenge();
+                    }
+                    EditText focus = null;
+                    if (!active && (flags & 32) != 0) {
+                        if (this.post_import_help_blurb != null) this.post_import_help_blurb.setVisibility(View.VISIBLE);
+                    } else if (active) {
+                        if (this.post_import_help_blurb != null) this.post_import_help_blurb.setVisibility(View.GONE);
+                    }
+                    ProxyList proxy_list = get_proxy_list();
+                    if (active || proxy_list == null || proxy_list.size() <= 0) {
+                        if (this.proxy_group != null) this.proxy_group.setVisibility(View.GONE);
+                    } else {
+                        SpinUtil.show_spinner(this, this.proxy_spin, proxy_list.get_name_list(true));
+                        String name = proxy_list.get_enabled(true);
+                        if (name != null) {
+                            SpinUtil.set_spinner_selected_item(this.proxy_spin, name);
+                        }
+                        if (this.proxy_group != null) this.proxy_group.setVisibility(View.VISIBLE);
+                    }
+                    if (active || !prof.server_list_defined()) {
+                        if (this.server_group != null) this.server_group.setVisibility(View.GONE);
+                    } else {
+                        SpinUtil.show_spinner(this, this.server_spin, prof.get_server_list().display_names());
+                        String server = this.prefs.get_string_by_profile(prof.get_name(), "server");
+                        if (server != null) {
+                            SpinUtil.set_spinner_selected_item(this.server_spin, server);
+                        }
+                        if (this.server_group != null) this.server_group.setVisibility(View.VISIBLE);
+                    }
+                    if (active) {
+                        if (this.username_group != null) this.username_group.setVisibility(View.GONE);
+                        if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.GONE);
+                        if (this.password_group != null) this.password_group.setVisibility(View.GONE);
+                    } else {
+                        boolean is_pwd_save;
+                        String saved_pwd;
+                        boolean udef = prof.userlocked_username_defined();
+                        boolean autologin = prof.get_autologin();
+                        boolean pk_pwd_req = prof.get_private_key_password_required();
+                        boolean dynamic_challenge = prof.is_dynamic_challenge();
+                        if ((!autologin || udef) && !dynamic_challenge) {
+                            if (udef) {
+                                if (this.username_edit != null) {
+                                    this.username_edit.setText(prof.get_userlocked_username());
+                                    set_enabled(this.username_edit, RETAIN_AUTH);
+                                }
+                            } else {
+                                if (this.username_edit != null) {
+                                    set_enabled(this.username_edit, true);
+                                    String pref_username = this.prefs.get_string_by_profile(prof.get_name(), "username");
+                                    if (pref_username != null) {
+                                        this.username_edit.setText(pref_username);
+                                    } else {
+                                        focus = this.username_edit;
+                                    }
+                                }
+                            }
+                            if (this.username_group != null) this.username_group.setVisibility(View.VISIBLE);
+                        } else {
+                            if (this.username_group != null) this.username_group.setVisibility(View.GONE);
+                        }
+                        if (pk_pwd_req) {
+                            is_pwd_save = this.prefs.get_boolean_by_profile(prof.get_name(), "pk_password_save", RETAIN_AUTH);
+                            saved_pwd = null;
+                            if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.VISIBLE);
+                            if (this.pk_password_save_checkbox != null) this.pk_password_save_checkbox.setChecked(is_pwd_save);
+                            if (is_pwd_save) {
+                                saved_pwd = this.pwds.get("pk", prof.get_name());
+                            }
+                            if (saved_pwd != null && this.pk_password_edit != null) {
+                                this.pk_password_edit.setText(saved_pwd);
+                            } else if (focus == null) {
+                                focus = this.pk_password_edit;
+                            }
+                        } else {
+                            if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.GONE);
+                        }
+                        if (autologin || dynamic_challenge) {
+                            if (this.password_group != null) this.password_group.setVisibility(View.GONE);
+                        } else {
+                            boolean is_auth_pw_save = prof.get_allow_password_save();
+                            is_pwd_save = (is_auth_pw_save && this.prefs.get_boolean_by_profile(prof.get_name(), "auth_password_save", RETAIN_AUTH));
+                            saved_pwd = null;
+                            if (this.password_group != null) this.password_group.setVisibility(View.VISIBLE);
+                            if (this.password_save_checkbox != null) {
+                                this.password_save_checkbox.setEnabled(is_auth_pw_save);
+                                this.password_save_checkbox.setChecked(is_pwd_save);
+                            }
+                            if (is_pwd_save) {
+                                saved_pwd = this.pwds.get("auth", prof.get_name());
+                            }
+                            if (saved_pwd != null && this.password_edit != null) {
+                                this.password_edit.setText(saved_pwd);
+                            } else if (focus == null) {
+                                focus = this.password_edit;
+                            }
+                        }
+                    }
+                    if (active || prof.get_autologin() || !prof.challenge_defined()) {
+                        if (this.cr_group != null) this.cr_group.setVisibility(View.GONE);
+                    } else {
+                        if (this.cr_group != null) this.cr_group.setVisibility(View.VISIBLE);
+                        Challenge chal = prof.get_challenge();
+                        if (this.challenge_view != null) {
+                            this.challenge_view.setText(chal.get_challenge());
+                            this.challenge_view.setVisibility(View.VISIBLE);
+                        }
+                        if (chal.get_response_required()) {
+                            if (this.response_edit != null) {
+                                if (chal.get_echo()) {
+                                    this.response_edit.setTransformationMethod(SingleLineTransformationMethod.getInstance());
+                                } else {
+                                    this.response_edit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                                }
+                                this.response_edit.setVisibility(View.VISIBLE);
+                            }
+                            if (focus == null) {
+                                focus = this.response_edit;
+                            }
+                        } else {
+                            if (this.response_edit != null) this.response_edit.setVisibility(View.GONE);
+                        }
+                        if (prof.is_dynamic_challenge()) {
+                            schedule_ui_reset(prof.get_dynamic_challenge_expire_delay());
+                        }
+                    }
+
+                    if (this.button_group != null) this.button_group.setVisibility(View.VISIBLE);
+                    if (this.status_view != null) this.status_view.setVisibility(View.VISIBLE);
+
+                    if (orig_active) {
+                        if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE);
+                        if (this.connect_button != null) this.connect_button.setVisibility(View.GONE);
+                        if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.VISIBLE);
+                    } else {
+                        if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE);
+                        if (this.connect_button != null) this.connect_button.setVisibility(View.VISIBLE);
+                        if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.GONE);
+                    }
+                    if (focus != null) {
+                        autostart = RETAIN_AUTH;
+                    }
+                    req_focus(focus);
+                } else {
                     if (this.post_import_help_blurb != null) this.post_import_help_blurb.setVisibility(View.GONE);
-                }
-                ProxyList proxy_list = get_proxy_list();
-                if (active || proxy_list == null || proxy_list.size() <= 0) {
                     if (this.proxy_group != null) this.proxy_group.setVisibility(View.GONE);
-                } else {
-                    SpinUtil.show_spinner(this, this.proxy_spin, proxy_list.get_name_list(true));
-                    String name = proxy_list.get_enabled(true);
-                    if (name != null) {
-                        SpinUtil.set_spinner_selected_item(this.proxy_spin, name);
-                    }
-                    if (this.proxy_group != null) this.proxy_group.setVisibility(View.VISIBLE);
-                }
-                if (active || !prof.server_list_defined()) {
                     if (this.server_group != null) this.server_group.setVisibility(View.GONE);
-                } else {
-                    SpinUtil.show_spinner(this, this.server_spin, prof.get_server_list().display_names());
-                    String server = this.prefs.get_string_by_profile(prof.get_name(), "server");
-                    if (server != null) {
-                        SpinUtil.set_spinner_selected_item(this.server_spin, server);
-                    }
-                    if (this.server_group != null) this.server_group.setVisibility(View.VISIBLE);
-                }
-                if (active) {
                     if (this.username_group != null) this.username_group.setVisibility(View.GONE);
                     if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.GONE);
                     if (this.password_group != null) this.password_group.setVisibility(View.GONE);
-                } else {
-                    boolean is_pwd_save;
-                    String saved_pwd;
-                    boolean udef = prof.userlocked_username_defined();
-                    boolean autologin = prof.get_autologin();
-                    boolean pk_pwd_req = prof.get_private_key_password_required();
-                    boolean dynamic_challenge = prof.is_dynamic_challenge();
-                    if ((!autologin || udef) && !dynamic_challenge) {
-                        if (udef) {
-                            if (this.username_edit != null) {
-                                this.username_edit.setText(prof.get_userlocked_username());
-                                set_enabled(this.username_edit, RETAIN_AUTH);
-                            }
-                        } else {
-                            if (this.username_edit != null) {
-                                set_enabled(this.username_edit, true);
-                                String pref_username = this.prefs.get_string_by_profile(prof.get_name(), "username");
-                                if (pref_username != null) {
-                                    this.username_edit.setText(pref_username);
-                                } else {
-                                    focus = this.username_edit;
-                                }
-                            }
-                        }
-                        if (this.username_group != null) this.username_group.setVisibility(View.VISIBLE);
-                    } else {
-                        if (this.username_group != null) this.username_group.setVisibility(View.GONE);
-                    }
-                    if (pk_pwd_req) {
-                        is_pwd_save = this.prefs.get_boolean_by_profile(prof.get_name(), "pk_password_save", RETAIN_AUTH);
-                        saved_pwd = null;
-                        if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.VISIBLE);
-                        if (this.pk_password_save_checkbox != null) this.pk_password_save_checkbox.setChecked(is_pwd_save);
-                        if (is_pwd_save) {
-                            saved_pwd = this.pwds.get("pk", prof.get_name());
-                        }
-                        if (saved_pwd != null && this.pk_password_edit != null) {
-                            this.pk_password_edit.setText(saved_pwd);
-                        } else if (focus == null) {
-                            focus = this.pk_password_edit;
-                        }
-                    } else {
-                        if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.GONE);
-                    }
-                    if (autologin || dynamic_challenge) {
-                        if (this.password_group != null) this.password_group.setVisibility(View.GONE);
-                    } else {
-                        boolean is_auth_pw_save = prof.get_allow_password_save();
-                        is_pwd_save = (is_auth_pw_save && this.prefs.get_boolean_by_profile(prof.get_name(), "auth_password_save", RETAIN_AUTH));
-                        saved_pwd = null;
-                        if (this.password_group != null) this.password_group.setVisibility(View.VISIBLE);
-                        if (this.password_save_checkbox != null) {
-                            this.password_save_checkbox.setEnabled(is_auth_pw_save);
-                            this.password_save_checkbox.setChecked(is_pwd_save);
-                        }
-                        if (is_pwd_save) {
-                            saved_pwd = this.pwds.get("auth", prof.get_name());
-                        }
-                        if (saved_pwd != null && this.password_edit != null) {
-                            this.password_edit.setText(saved_pwd);
-                        } else if (focus == null) {
-                            focus = this.password_edit;
-                        }
-                    }
-                }
-                if (active || prof.get_autologin() || !prof.challenge_defined()) {
                     if (this.cr_group != null) this.cr_group.setVisibility(View.GONE);
-                } else {
-                    if (this.cr_group != null) this.cr_group.setVisibility(View.VISIBLE);
-                    Challenge chal = prof.get_challenge();
-                    if (this.challenge_view != null) {
-                        this.challenge_view.setText(chal.get_challenge());
-                        this.challenge_view.setVisibility(View.VISIBLE);
-                    }
-                    if (chal.get_response_required()) {
-                        if (this.response_edit != null) {
-                            if (chal.get_echo()) {
-                                this.response_edit.setTransformationMethod(SingleLineTransformationMethod.getInstance());
-                            } else {
-                                this.response_edit.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                            }
-                            this.response_edit.setVisibility(View.VISIBLE);
-                        }
-                        if (focus == null) {
-                            focus = this.response_edit;
-                        }
-                    } else {
-                        if (this.response_edit != null) this.response_edit.setVisibility(View.GONE);
-                    }
-                    if (prof.is_dynamic_challenge()) {
-                        schedule_ui_reset(prof.get_dynamic_challenge_expire_delay());
-                    }
+                    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.GONE);
+
+                    if (this.button_group != null) this.button_group.setVisibility(View.VISIBLE);
+                    if (this.connect_button != null) this.connect_button.setVisibility(View.VISIBLE);
+                    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.GONE);
+
+                    show_status_icon(R.drawable.info);
+                    show_status(R.string.no_profiles_loaded);
                 }
-                
-                if (this.button_group != null) this.button_group.setVisibility(View.VISIBLE);
-                if (this.status_view != null) this.status_view.setVisibility(View.VISIBLE);
-                
-if (orig_active) {
-    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE);
-    if (this.connect_button != null) this.connect_button.setVisibility(View.GONE);
-    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.VISIBLE);
-} else {
-    if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.VISIBLE); // เปลี่ยนจาก GONE เป็น VISIBLE
-    if (this.connect_button != null) this.connect_button.setVisibility(View.VISIBLE);
-    if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.GONE);
-}
-                if (focus != null) {
-                    autostart = RETAIN_AUTH;
-                }
-                req_focus(focus);
-            } else {
-                if (this.post_import_help_blurb != null) this.post_import_help_blurb.setVisibility(View.GONE);
-                if (this.proxy_group != null) this.proxy_group.setVisibility(View.GONE);
-                if (this.server_group != null) this.server_group.setVisibility(View.GONE);
-                if (this.username_group != null) this.username_group.setVisibility(View.GONE);
-                if (this.pk_password_group != null) this.pk_password_group.setVisibility(View.GONE);
-                if (this.password_group != null) this.password_group.setVisibility(View.GONE);
-                if (this.cr_group != null) this.cr_group.setVisibility(View.GONE);
-                if (this.conn_details_group != null) this.conn_details_group.setVisibility(View.GONE);
-                
-                if (this.button_group != null) this.button_group.setVisibility(View.VISIBLE);
-                if (this.connect_button != null) this.connect_button.setVisibility(View.VISIBLE);
-                if (this.disconnect_button != null) this.disconnect_button.setVisibility(View.GONE);
-                
-                show_status_icon(R.drawable.info);
-                show_status(R.string.no_profiles_loaded);
             }
+
             if (orig_active) {
                 schedule_stats();
             } else {
@@ -1434,7 +1429,7 @@ if (orig_active) {
             this.finish_on_connect = FinishOnConnect.ENABLED;
             start_connect();
         }
-    }
+    }    
     
     private void set_enabled(EditText editText, boolean state) {
         editText.setEnabled(state);
