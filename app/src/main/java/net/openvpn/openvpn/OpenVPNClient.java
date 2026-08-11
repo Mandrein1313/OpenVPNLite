@@ -130,6 +130,7 @@ public class OpenVPNClient extends OpenVPNClientBase implements OnRequestPermiss
     private int startup_state = 0;
     private View stats_expansion_group;
     private View stats_group;
+    private TextView profile_name_text;
     
     private final Handler stats_timer_handler = new Handler(Looper.getMainLooper());
     private final Runnable stats_timer_task = new Runnable() {
@@ -783,6 +784,7 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
         }
     }
 
+
     private void setCurrentTheme(int resId) {
         setTheme(resId);
     }
@@ -1242,10 +1244,23 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
                 if (ps != ProfileSource.SPINNER) {
                     SpinUtil.set_spinner_selected_item(this.profile_spin, prof.get_name());
                 }
+
+                // อัปเดตชื่อบนการ์ดโปรไฟล์
+                if (this.profile_name_text != null && prof != null) {
+                    this.profile_name_text.setText(prof.get_name());
+                }
+
                 if (this.profile_group != null) this.profile_group.setVisibility(View.VISIBLE);
                 if (this.profile_spin != null) this.profile_spin.setEnabled(!active);
                 if (this.profile_edit != null) this.profile_edit.setVisibility(active ? View.GONE : View.VISIBLE);
-            }
+// อัปเดตข้อความบนการ์ดโปรไฟล์
+if (this.profile_name_text != null && prof != null) {
+    this.profile_name_text.setText(prof.get_name());
+}
+
+if (this.profile_group != null) this.profile_group.setVisibility(View.VISIBLE);
+if (this.profile_spin != null) this.profile_spin.setEnabled(!active);
+if (this.profile_edit != null) this.profile_edit.setVisibility(active ? View.GONE : View.VISIBLE);
             if (prof != null) {
                 if ((UIF_RESET & flags) != 0) {
                     prof.reset_dynamic_challenge();
@@ -2111,7 +2126,48 @@ if (orig_active) {
             }
         }
     }
+private void showProfilePickerDialog() {
+    if (is_active()) {
+        Toast.makeText(this, "ตัดการเชื่อมต่อก่อนเปลี่ยนโปรไฟล์", Toast.LENGTH_SHORT).show();
+        return;
+    }
 
+    ProfileList proflist = profile_list();
+    if (proflist == null || proflist.size() <= 0) {
+        Toast.makeText(this, "ยังไม่มีโปรไฟล์", Toast.LENGTH_SHORT).show();
+        return;
+    }
+
+    final String[] names = proflist.profile_names();
+    if (names == null || names.length == 0) {
+        Toast.makeText(this, "ยังไม่มีโปรไฟล์", Toast.LENGTH_SHORT).show();
+        return;
+    }
+
+    String current = selected_profile_name();
+    int checked = -1;
+    for (int i = 0; i < names.length; i++) {
+        if (names[i] != null && names[i].equals(current)) {
+            checked = i;
+            break;
+        }
+    }
+
+    new AlertDialog.Builder(this)
+            .setTitle("เลือกโปรไฟล์ VPN")
+            .setSingleChoiceItems(names, checked, (dialog, which) -> {
+                if (this.profile_spin != null) {
+                    SpinUtil.set_spinner_selected_item(this.profile_spin, names[which]);
+                }
+                if (this.profile_name_text != null) {
+                    this.profile_name_text.setText(names[which]);
+                }
+                dialog.dismiss();
+                ui_setup(is_active(), UIF_PROFILE_SETTING_FROM_SPINNER, null);
+            })
+            .setNegativeButton("ยกเลิก", null)
+            .show();
+}
     private void load_ui_elements() {
         this.main_scroll_view = (ScrollView) findViewById(R.id.main_scroll_view);
         this.post_import_help_blurb = findViewById(R.id.post_import_help_blurb);
@@ -2150,6 +2206,14 @@ if (orig_active) {
         this.bytes_in_view = (TextView) findViewById(R.id.bytes_in);
         this.bytes_out_view = (TextView) findViewById(R.id.bytes_out);
         
+        this.profile_name_text = (TextView) findViewById(R.id.profile_name_text);
+
+// กดการ์ดโปรไฟล์ → เปิด Dialog เลือก
+View profileGroup = findViewById(R.id.profile_group);
+if (profileGroup != null) {
+    profileGroup.setOnClickListener(v -> showProfilePickerDialog());
+}
+        
         if (this.connect_button != null) this.connect_button.setOnClickListener(this);
         if (this.disconnect_button != null) this.disconnect_button.setOnClickListener(this);
         if (this.profile_spin != null) {
@@ -2165,10 +2229,15 @@ if (orig_active) {
         View connDetails = findViewById(R.id.conn_details_boxed);
         if (connDetails != null) connDetails.setOnTouchListener(this);
         
-        if (this.profile_edit != null) {
-            this.profile_edit.setOnClickListener(this);
-            registerForContextMenu(this.profile_edit);
-        }
+if (this.profile_edit != null) {
+    this.profile_edit.setOnClickListener(this);
+    registerForContextMenu(this.profile_edit);
+    // กันไม่ให้คลิกทะลุไปที่การ์ด
+    this.profile_edit.setOnTouchListener((v, event) -> {
+        v.getParent().requestDisallowInterceptTouchEvent(true);
+        return false;
+    });
+}
         if (this.proxy_edit != null) {
             this.proxy_edit.setOnClickListener(this);
             registerForContextMenu(this.proxy_edit);
