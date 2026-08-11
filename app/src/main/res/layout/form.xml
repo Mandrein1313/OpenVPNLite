@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="#121212">
     
-<!-- Toolbar แบบ Umay+ (มีแค่ปุ่ม Log) -->
-    <com.google.android.material.appbar.AppBarLayout
+<com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1C1C1E"
+        android:background="#111827"
         app:elevation="0dp">
 
         <RelativeLayout
@@ -19,7 +18,7 @@
             android:layout_height="56dp"
             android:paddingStart="16dp"
             android:paddingEnd="8dp"
-            android:background="#1C1C1E">
+            android:background="#111827">
 
             <!-- โลโก้ + ชื่อแอป (ซ้าย) -->
             <LinearLayout
