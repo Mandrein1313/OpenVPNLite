@@ -2168,7 +2168,7 @@ private void showProfilePickerDialog() {
         dialog.getListView().setDivider(null);
         dialog.getListView().setDividerHeight(0);
     }
-}}
+}
     private void load_ui_elements() {
         this.main_scroll_view = (ScrollView) findViewById(R.id.main_scroll_view);
         this.post_import_help_blurb = findViewById(R.id.post_import_help_blurb);
