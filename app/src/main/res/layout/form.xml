@@ -5,25 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212">
-
-    <!-- เมนูด้านบน -->
+    
+<!-- Toolbar แบบ Umay+ (มีแค่ปุ่ม Log) -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1C1C1E"
-        app:elevation="4dp">
+        app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="#1C1C1E"
-            app:title="VPN THAI"
-            app:titleTextColor="#FFFFFF"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:paddingStart="16dp"
+            android:paddingEnd="8dp"
+            android:background="#1C1C1E">
 
+            <!-- โลโก้ + ชื่อแอป (ซ้าย) -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true">
+
+                <TextView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:text="V"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/toolbar_logo_bg" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VPN THAI"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:paddingStart="10dp"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+
+            <!-- ปุ่ม Log (ขวา) -->
+            <ImageButton
+                android:id="@+id/toolbar_log"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@android:drawable/ic_menu_info_details"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Log"
+                app:tint="#E5E7EB" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:id="@+id/main_scroll_view"
         android:layout_width="match_parent"

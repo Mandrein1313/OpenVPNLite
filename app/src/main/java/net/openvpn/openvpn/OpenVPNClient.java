@@ -204,13 +204,12 @@ public class OpenVPNClient extends OpenVPNClientBase implements OnRequestPermiss
 
         setContentView(R.layout.form);
 
-        // ตั้ง Toolbar ด้านบน
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("VPN THAI");
-            }
+        // ปุ่ม Log บน Toolbar
+        View btnLog = findViewById(R.id.toolbar_log);
+        if (btnLog != null) {
+            btnLog.setOnClickListener(v -> {
+                startActivity(new Intent(this, OpenVPNLog.class));
+            });
         }
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -219,11 +218,6 @@ public class OpenVPNClient extends OpenVPNClientBase implements OnRequestPermiss
             window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(android.graphics.Color.BLACK);
         }
-
-        // อย่า hide() แล้ว — ลบโค้ดนี้ออก
-        // if (getSupportActionBar() != null) {
-        //     getSupportActionBar().hide();
-        // }
 
         load_ui_elements();
         
