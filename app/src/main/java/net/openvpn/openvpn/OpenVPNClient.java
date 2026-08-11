@@ -216,7 +216,7 @@ public class OpenVPNClient extends OpenVPNClientBase implements OnRequestPermiss
             android.view.Window window = getWindow();
             window.addFlags(android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(android.graphics.Color.BLACK);
+            window.setStatusBarColor(android.graphics.Color.parseColor("#111827"));
         }
 
         load_ui_elements();
