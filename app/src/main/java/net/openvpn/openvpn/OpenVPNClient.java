@@ -2148,42 +2148,27 @@ private void showProfilePickerDialog() {
         }
     }
 
-    // ใช้ธีมมืด
-    AlertDialog.Builder builder = new AlertDialog.Builder(
-            new android.view.ContextThemeWrapper(this, android.R.style.Theme_DeviceDefault_Dialog)
-    );
-
-    builder.setTitle("เลือกโปรไฟล์ VPN")
-            .setSingleChoiceItems(names, checked, (dialog, which) -> {
+    AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomDarkDialog)
+            .setTitle("เลือกโปรไฟล์ VPN")
+            .setSingleChoiceItems(names, checked, (d, which) -> {
                 if (this.profile_spin != null) {
                     SpinUtil.set_spinner_selected_item(this.profile_spin, names[which]);
                 }
                 if (this.profile_name_text != null) {
                     this.profile_name_text.setText(names[which]);
                 }
-                dialog.dismiss();
+                d.dismiss();
                 ui_setup(is_active(), UIF_PROFILE_SETTING_FROM_SPINNER, null);
             })
-            .setNegativeButton("ยกเลิก", null);
+            .setNegativeButton("ยกเลิก", null)
+            .show();
 
-    AlertDialog dialog = builder.create();
-    if (dialog.getWindow() != null) {
-        dialog.getWindow().setBackgroundDrawable(
-                new android.graphics.drawable.ColorDrawable(
-                        android.graphics.Color.parseColor("#1C1C1E")
-                )
-        );
-    }
-    dialog.show();
-
-    // ปรับสีข้อความ / ปุ่มให้เข้าธีมมืด
+    // ลบเส้นคั่นระหว่างรายการ
     if (dialog.getListView() != null) {
-        dialog.getListView().setBackgroundColor(android.graphics.Color.parseColor("#1C1C1E"));
-        dialog.getListView().setDivider(new android.graphics.drawable.ColorDrawable(
-                android.graphics.Color.parseColor("#2C2C2E")));
-        dialog.getListView().setDividerHeight(1);
+        dialog.getListView().setDivider(null);
+        dialog.getListView().setDividerHeight(0);
     }
-}
+}}
     private void load_ui_elements() {
         this.main_scroll_view = (ScrollView) findViewById(R.id.main_scroll_view);
         this.post_import_help_blurb = findViewById(R.id.post_import_help_blurb);
