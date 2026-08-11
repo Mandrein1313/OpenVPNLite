@@ -6,13 +6,32 @@
     android:layout_height="match_parent"
     android:background="#121212">
 
+    <!-- เมนูด้านบน -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1C1C1E"
+        app:elevation="4dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#1C1C1E"
+            app:title="VPN THAI"
+            app:titleTextColor="#FFFFFF"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:id="@+id/main_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="72dp"
         android:fillViewport="true"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +39,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- โปรไฟล์ (เปลี่ยนพื้นหลังการ์ดเป็นสีเทาเข้ม #2C2C2E) -->
+            <!-- โปรไฟล์ -->
             <LinearLayout
                 android:id="@+id/profile_group"
                 android:layout_width="match_parent"
@@ -107,7 +126,7 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-            <!-- สถานะ (ปรับพื้นหลังเป็น #2C2C2E และตัวหนังสือเป็นสีสว่าง) -->
+            <!-- สถานะ -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -618,6 +637,7 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- ด้านล่างเหมือนเดิม -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
