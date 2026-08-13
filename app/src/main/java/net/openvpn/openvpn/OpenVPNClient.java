@@ -761,51 +761,55 @@ private void cleanOldFiles() {
         }
         
 private void refreshProfilesInApp() {
-    try {
-        // 1) ลบโปรไฟล์เก่าทั้งหมดในระบบก่อน
-        ProfileList proflist = activity.profile_list();
-        if (proflist != null && proflist.size() > 0) {
-            // สำเนาชื่อก่อน กันแก้ list ขณะวนลูป
-            String[] oldNames = proflist.profile_names();
-            if (oldNames != null) {
-                for (String name : oldNames) {
-                    if (name == null) continue;
-                    try {
-                        // ลบโปรไฟล์เก่า (ใช้ intent ที่มีในแอป)
-                        activity.submitDeleteProfileIntent(name);
-                    } catch (Exception e) {
-                        Log.e(TAG, "Delete old profile failed: " + name, e);
+            try {
+                // 1) ลบโปรไฟล์เก่าทั้งหมดในระบบก่อน
+                ProfileList proflist = activity.profile_list();
+                if (proflist != null && proflist.size() > 0) {
+                    String[] oldNames = proflist.profile_names();
+                    if (oldNames != null) {
+                        for (String name : oldNames) {
+                            if (name == null) continue;
+                            try {
+                                activity.submitDeleteProfileIntent(name);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Delete old profile failed: " + name, e);
+                            }
+                        }
                     }
                 }
-            }
-        }
 
-        // 2) นำเข้าไฟล์ .ovpn ใหม่จากโฟลเดอร์
-        File dir = activity.getFilesDir();
-        File[] files = dir.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f == null || !f.isFile()) continue;
-                String name = f.getName().toLowerCase(java.util.Locale.US);
-                if (name.endsWith(".ovpn")) {
-                    activity.submitImportProfileViaPathIntent(f.getAbsolutePath());
+                // 2) นำเข้าไฟล์ .ovpn ใหม่จากโฟลเดอร์
+                File dir = activity.getFilesDir();
+                File[] files = dir.listFiles();
+                if (files != null) {
+                    for (File f : files) {
+                        if (f == null || !f.isFile()) continue;
+                        String name = f.getName().toLowerCase(java.util.Locale.US);
+                        if (name.endsWith(".ovpn")) {
+                            activity.submitImportProfileViaPathIntent(f.getAbsolutePath());
+                        }
+                    }
                 }
+            } catch (Exception e) {
+                Log.e(TAG, "refreshProfilesInApp failed", e);
             }
-        }
-    } catch (Exception e) {
-        Log.e(TAG, "refreshProfilesInApp failed", e);
-    }
 
-    // 3) รีเฟรช UI
-    activity.runOnUiThread(() -> {
-        try {
-            activity.gen_ui_reset_event(true);
-            activity.ui_setup(activity.is_active(), OpenVPNClient.UIF_RESET, null);
-        } catch (Exception e) {
-            Log.e(TAG, "UI refresh failed", e);
-        }
-    });
-}
+            // 3) รีเฟรช UI
+            activity.runOnUiThread(() -> {
+                try {
+                    activity.gen_ui_reset_event(true);
+                    activity.ui_setup(activity.is_active(), OpenVPNClient.UIF_RESET, null);
+                } catch (Exception e) {
+                    Log.e(TAG, "UI refresh failed", e);
+                }
+            });
+        }   // ปิด refreshProfilesInApp
+
+    }       // ← เพิ่มบรรทัดนี้! ปิด class UpdateManager
+
+    private void setCurrentTheme(int resId) {
+        setTheme(resId);
+    }
 
 
     private void setCurrentTheme(int resId) {
