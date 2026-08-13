@@ -705,30 +705,38 @@ private void startDownloadZipWithDialog(String downloadUrl, AlertDialog dialog,
             });
         }
 
-        private void renameOvpnFilesToEncoded() {
-            File dir = activity.getFilesDir();
-            File[] files = dir.listFiles();
-            if (files == null) return;
+private void renameOvpnFilesToEncoded() {
+    File dir = activity.getFilesDir();
+    File[] files = dir.listFiles();
+    if (files == null) return;
 
-            for (File file : files) {
-                String name = file.getName();
-                if (!name.toLowerCase().endsWith(".ovpn")) continue;
+    for (File file : files) {
+        String name = file.getName();
+        if (!name.toLowerCase(java.util.Locale.US).endsWith(".ovpn")) continue;
 
-                String baseName = name.substring(0, name.length() - 5);
+        String base = name.substring(0, name.length() - 5);
 
-                try {
-                    String encoded = java.net.URLEncoder.encode(baseName, "UTF-8") + ".ovpn";
-                    if (!encoded.equals(name)) {
-                        File newFile = new File(dir, encoded);
-                        if (!newFile.exists()) {
-                            file.renameTo(newFile);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.e(TAG, "Rename ovpn failed: " + name, e);
-                }
-            }
+        // "49.48.219.173 [TH+Name+123]" → "TH Name 123"
+        int a = base.indexOf('[');
+        int b = base.lastIndexOf(']');
+        if (a >= 0 && b > a) {
+            base = base.substring(a + 1, b).trim();
         }
+
+        base = base.replace('+', ' ').replaceAll("\\s+", " ").trim();
+        if (base.isEmpty()) continue;
+
+        String newName = base + ".ovpn";
+        if (newName.equals(name)) continue;
+
+        File dest = new File(dir, newName);
+        if (dest.exists()) {
+            file.delete(); // มีชื่อสั้นอยู่แล้ว → ลบไฟล์ซ้ำ
+        } else {
+            file.renameTo(dest);
+        }
+    }
+}
 
 private void cleanOldFiles() {
     File dir = activity.getFilesDir();
@@ -761,40 +769,8 @@ private void cleanOldFiles() {
         }
         
 private void refreshProfilesInApp() {
-            try {
-                // 1) ลบโปรไฟล์เก่าทั้งหมดในระบบก่อน
-                ProfileList proflist = activity.profile_list();
-                if (proflist != null && proflist.size() > 0) {
-                    String[] oldNames = proflist.profile_names();
-                    if (oldNames != null) {
-                        for (String name : oldNames) {
-                            if (name == null) continue;
-                            try {
-                                activity.submitDeleteProfileIntent(name);
-                            } catch (Exception e) {
-                                Log.e(TAG, "Delete old profile failed: " + name, e);
-                            }
-                        }
-                    }
-                }
-
-                // 2) นำเข้าไฟล์ .ovpn ใหม่จากโฟลเดอร์
-                File dir = activity.getFilesDir();
-                File[] files = dir.listFiles();
-                if (files != null) {
-                    for (File f : files) {
-                        if (f == null || !f.isFile()) continue;
-                        String name = f.getName().toLowerCase(java.util.Locale.US);
-                        if (name.endsWith(".ovpn")) {
-                            activity.submitImportProfileViaPathIntent(f.getAbsolutePath());
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "refreshProfilesInApp failed", e);
-            }
-
-            // 3) รีเฟรช UI
+            // ไม่ import ซ้ำ — ไฟล์ถูก clean + rename แล้ว
+            // แค่รีโหลดรายการบนหน้าจอ
             activity.runOnUiThread(() -> {
                 try {
                     activity.gen_ui_reset_event(true);
@@ -803,12 +779,9 @@ private void refreshProfilesInApp() {
                     Log.e(TAG, "UI refresh failed", e);
                 }
             });
-        }   // ปิด refreshProfilesInApp
+        }
 
-    }       // ← เพิ่มบรรทัดนี้! ปิด class UpdateManager
-
-
-
+    } // ปิด class UpdateManager
 
     private void setCurrentTheme(int resId) {
         setTheme(resId);
