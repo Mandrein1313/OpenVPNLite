@@ -769,20 +769,33 @@ private void cleanOldFiles() {
         }
         
 private void refreshProfilesInApp() {
-            // ไม่ import ซ้ำ — ไฟล์ถูก clean + rename แล้ว
-            // แค่รีโหลดรายการบนหน้าจอ
+            try {
+                // นำเข้า .ovpn ใหม่จากโฟลเดอร์ (หลัง clean + extract + rename แล้ว)
+                File dir = activity.getFilesDir();
+                File[] files = dir.listFiles();
+                if (files != null) {
+                    for (File f : files) {
+                        if (f == null || !f.isFile()) continue;
+                        String name = f.getName().toLowerCase(java.util.Locale.US);
+                        if (name.endsWith(".ovpn")) {
+                            activity.submitImportProfileViaPathIntent(f.getAbsolutePath());
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "refreshProfilesInApp failed", e);
+            }
+
             activity.runOnUiThread(() -> {
                 try {
                     activity.gen_ui_reset_event(true);
                     activity.ui_setup(activity.is_active(), OpenVPNClient.UIF_RESET, null);
+                    Toast.makeText(activity, "อัปเดตโปรไฟล์แล้ว", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Log.e(TAG, "UI refresh failed", e);
                 }
             });
         }
-
-    } // ปิด class UpdateManager
-
     private void setCurrentTheme(int resId) {
         setTheme(resId);
     }
