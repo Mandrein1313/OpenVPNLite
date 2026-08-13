@@ -770,33 +770,51 @@ private void cleanOldFiles() {
         
 private void refreshProfilesInApp() {
             try {
-                // นำเข้า .ovpn ใหม่จากโฟลเดอร์ (หลัง clean + extract + rename แล้ว)
                 File dir = activity.getFilesDir();
                 File[] files = dir.listFiles();
+                int count = 0;
+
                 if (files != null) {
                     for (File f : files) {
                         if (f == null || !f.isFile()) continue;
-                        String name = f.getName().toLowerCase(java.util.Locale.US);
-                        if (name.endsWith(".ovpn")) {
-                            activity.submitImportProfileViaPathIntent(f.getAbsolutePath());
+                        String fileName = f.getName();
+                        if (!fileName.toLowerCase(java.util.Locale.US).endsWith(".ovpn")) continue;
+
+                        try {
+                            // อ่านเนื้อไฟล์ แล้ว import ด้วยชื่อไฟล์ (ไม่ใช้ path)
+                            String content = readFileToString(f);
+                            if (content != null && content.trim().length() > 0) {
+                                activity.submitImportProfileIntent(content, fileName, true);
+                                count++;
+                                Log.d(TAG, "Imported profile: " + fileName);
+                            }
+                        } catch (Exception e) {
+                            Log.e(TAG, "Import failed: " + fileName, e);
                         }
                     }
                 }
+
+                Log.d(TAG, "Imported count = " + count);
+
+                final int imported = count;
+                activity.runOnUiThread(() -> {
+                    try {
+                        // หน่วงนิดหน่อย ให้ service ประมวลผล import
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            activity.gen_ui_reset_event(true);
+                            activity.ui_setup(activity.is_active(), OpenVPNClient.UIF_RESET, null);
+                            Toast.makeText(activity,
+                                    "นำเข้าโปรไฟล์ " + imported + " ไฟล์",
+                                    Toast.LENGTH_SHORT).show();
+                        }, 800);
+                    } catch (Exception e) {
+                        Log.e(TAG, "UI refresh failed", e);
+                    }
+                });
             } catch (Exception e) {
                 Log.e(TAG, "refreshProfilesInApp failed", e);
             }
-
-            activity.runOnUiThread(() -> {
-                try {
-                    activity.gen_ui_reset_event(true);
-                    activity.ui_setup(activity.is_active(), OpenVPNClient.UIF_RESET, null);
-                    Toast.makeText(activity, "อัปเดตโปรไฟล์แล้ว", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Log.e(TAG, "UI refresh failed", e);
-                }
-            });
         }
-      }
     private void setCurrentTheme(int resId) {
         setTheme(resId);
     }
