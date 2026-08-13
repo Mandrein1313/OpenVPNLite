@@ -815,6 +815,7 @@ private void refreshProfilesInApp() {
                 Log.e(TAG, "refreshProfilesInApp failed", e);
             }
         }
+        }
     private void setCurrentTheme(int resId) {
         setTheme(resId);
     }
