@@ -796,6 +796,7 @@ private void refreshProfilesInApp() {
                 }
             });
         }
+      }
     private void setCurrentTheme(int resId) {
         setTheme(resId);
     }
