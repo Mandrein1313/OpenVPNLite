@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#1C1C1E">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- หัวข้อ -->
+        <TextView
+            android:id="@+id/proxy_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proxy_title_add"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ใช้ตอนเชื่อมต่อ VPN ผ่าน HTTP Proxy"
+            android:textSize="13sp"
+            android:textColor="#9CA3AF"
+            android:paddingBottom="16dp" />
+
+        <!-- การ์ดหลัก -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#2C2C2E"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp">
+
+            <!-- ชื่อพร็อกซี่ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ชื่อพร็อกซี่ (ไม่บังคับ)"
+                android:textSize="12sp"
+                android:textColor="#9CA3AF"
+                android:paddingBottom="4dp" />
+
+            <EditText
+                android:id="@+id/proxy_friendly_name"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@android:color/transparent"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#6B7280"
+                android:hint="เช่น Proxy สำนักงาน"
+                android:textSize="15sp"
+                android:inputType="text"
+                android:paddingBottom="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#3F3F46"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Host + Port แถวเดียว -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Server Address"
+                        android:textSize="12sp"
+                        android:textColor="#9CA3AF"
+                        android:paddingBottom="4dp" />
+
+                    <EditText
+                        android:id="@+id/proxy_host"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:color/transparent"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#6B7280"
+                        android:hint="proxy.example.com"
+                        android:textSize="15sp"
+                        android:inputType="textUri"
+                        android:singleLine="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F59E0B" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Port"
+                        android:textSize="12sp"
+                        android:textColor="#9CA3AF"
+                        android:paddingBottom="4dp" />
+
+                    <EditText
+                        android:id="@+id/proxy_port"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:color/transparent"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#6B7280"
+                        android:hint="8080"
+                        android:textSize="15sp"
+                        android:inputType="number"
+                        android:singleLine="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#F59E0B" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ประเภท Proxy (แสดงอย่างเดียว ตอนนี้รองรับแค่ HTTP) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Proxy Type"
+                android:textSize="12sp"
+                android:textColor="#9CA3AF"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="●  HTTP"
+                android:textSize="15sp"
+                android:textColor="#F59E0B"
+                android:paddingBottom="4dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="○  Socks5 / Tor (ยังไม่รองรับในเวอร์ชันนี้)"
+                android:textSize="13sp"
+                android:textColor="#6B7280"
+                android:paddingBottom="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#3F3F46"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Auth -->
+            <CheckBox
+                android:id="@+id/proxy_allow_cleartext_auth_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Proxy Authentication"
+                android:textSize="14sp"
+                android:textColor="#E5E7EB"
+                android:buttonTint="#F59E0B"
+                android:paddingBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Username"
+                        android:textSize="12sp"
+                        android:textColor="#9CA3AF"
+                        android:paddingBottom="4dp" />
+
+                    <EditText
+                        android:id="@+id/proxy_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:color/transparent"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#6B7280"
+                        android:hint="username"
+                        android:textSize="15sp"
+                        android:inputType="text"
+                        android:singleLine="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#3F3F46" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Password"
+                        android:textSize="12sp"
+                        android:textColor="#9CA3AF"
+                        android:paddingBottom="4dp" />
+
+                    <EditText
+                        android:id="@+id/proxy_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@android:color/transparent"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#6B7280"
+                        android:hint="password"
+                        android:textSize="15sp"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#3F3F46" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- User-Agent -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="User-Agent (ไม่บังคับ)"
+                android:textSize="12sp"
+                android:textColor="#9CA3AF"
+                android:paddingTop="16dp"
+                android:paddingBottom="4dp" />
+
+            <EditText
+                android:id="@+id/proxy_user_agent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="44dp"
+                android:background="@android:color/transparent"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#6B7280"
+                android:hint="Mozilla/5.0 ..."
+                android:textSize="14sp"
+                android:inputType="textMultiLine"
+                android:paddingBottom="4dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#3F3F46" />
+        </LinearLayout>
+
+        <!-- ปุ่ม -->
+        <LinearLayout
+            android:id="@+id/proxy_button_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="24dp">
+
+            <Button
+                android:id="@+id/proxy_cancel_button"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="@string/proxy_cancel_button"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textColor="#E5E7EB"
+                android:background="#3F3F46" />
+
+            <Button
+                android:id="@+id/proxy_save_button"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/proxy_save_button"
+                android:textSize="15sp"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:background="#F59E0B" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
