@@ -745,9 +745,7 @@ private void cleanOldFiles() {
         f.delete();
     }
 }
-                }
-            }
-        }
+
 
         private void showSuccessAndRestartDialog() {
             if (activity.isFinishing() || activity.isDestroyed()) return;
