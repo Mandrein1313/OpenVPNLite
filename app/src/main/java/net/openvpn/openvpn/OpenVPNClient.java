@@ -807,9 +807,7 @@ private void refreshProfilesInApp() {
 
     }       // ← เพิ่มบรรทัดนี้! ปิด class UpdateManager
 
-    private void setCurrentTheme(int resId) {
-        setTheme(resId);
-    }
+
 
 
     private void setCurrentTheme(int resId) {
